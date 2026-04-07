@@ -1,3 +1,63 @@
-body {
-  background-color: #4FB572;
+body 
+{
+  background: linear-gradient(to right, #2FB181, #B8BF41);
+}
+
+div
+{
+  background-color: white;
+  text-align: center;
+}
+a[href="Apply.html"]
+{
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  color: black;
+  padding: 10px;
+}
+a[href="Jobs.html"]
+{
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  color: black;
+  padding: 10px;
+}
+
+a[href="about.html"]
+{
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  color: black;
+  padding: 10px;
+}
+a[href="Images/Logo.png"]
+{
+   
+}
+
+table
+{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+}
+
+p
+{
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    width: 400px;
+    margin: auto;
+}
+.classcontent
+{
+    background-color: white;
+}
+
+a[href="Images/SingleLogo.png"]
+{
+   
 }
