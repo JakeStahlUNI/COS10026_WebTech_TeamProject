@@ -1,38 +1,49 @@
 body 
 {
-  background: linear-gradient(to right, #2FB181, #B8BF41);
+  background: radial-gradient(circle at top left, #6a11cb, #2575fc, #ff9a9e);
 }
 
-div
-{
+.header {
+  display: flex;               /* logo + rest of header in a row */
+  align-items: center;         /* vertical alignment */
+  justify-content: space-between; /* logo left, everything else right */
+  padding: 10px 20px;
   background-color: white;
-  text-align: center;
-}
-a[href="Apply.html"]
-{
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  color: black;
-  padding: 10px;
-}
-a[href="Jobs.html"]
-{
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  color: black;
-  padding: 10px;
 }
 
-a[href="about.html"]
-{
+.logo {
+  width: 250px;
+  height: auto;
+}
+
+.search-and-nav {
+  display: flex;           /* search bar + links in a row */
+  align-items: center;
+  gap: 20px;              /* space between search bar and links */
+}
+
+.search-bar {
+  display: flex;
+  gap: 5px;
+}
+
+.search-bar input {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav-links a {
   text-decoration: none;
   font-family: Arial, sans-serif;
   color: black;
   padding: 10px;
-}
-a[href="Images/Logo.png"]
-{
-   
+  font-weight: bold;
 }
 
 table
