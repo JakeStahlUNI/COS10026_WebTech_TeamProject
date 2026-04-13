@@ -158,3 +158,65 @@ tr:hover td {
 .footer-left span {
   opacity: 0.6;
 }
+
+.about {
+  max-width: 1200px;
+  margin: 40px auto;     
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;       
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
+  font-family: Arial, sans-serif;
+}
+
+.about h2 {
+  display: flex;
+}
+
+.about hr {
+  color: black;
+}
+
+.about dl{
+  margin-bottom: 0.5rem;
+}
+
+
+.about dt{
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.about dd{
+  margin-bottom: 8px;
+}
+
+.aboutTable{
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.about thead{
+  background-color: #2575fc;
+
+}
+
+.about a{
+  color: black;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.footerLink{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.flag{
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
