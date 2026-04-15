@@ -1,5 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Apply page for a job recruitment website" />
+  <meta name="keywords" content="job application, careers, HTML5, CSS3, accessibility" />
+  <meta name="author" content="Lingyu Fu" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply | PixelCraft</title>
 
-/* Test you can delete */
-<h1>Apply Page</h1>
+  <link rel="stylesheet" href="styles/apply.css" />
+
+  <style>
+    .required-note {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      border-left: 4px solid #2c5f8a;
+      background-color: #eef5fb;
+      border-radius: 4px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>PixelCraft</h1>
+      <p class="tagline">Building inclusive digital learning experiences</p>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Jobs.html">Positions</a></li>
+          <li><a href="Apply.html" aria-current="page">Apply</a></li>
+          <li><a href="About.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-banner">
+      <h2>Job Application Form</h2>
+      <p>
+        Thank you for your interest in joining EduNova Careers. Please complete the form below carefully.
+        All fields are required except the <strong>Other Skills</strong> text area.
+      </p>
+    </section>
+
+    <section aria-labelledby="application-form-heading" class="form-section">
+      <h3 id="application-form-heading">Apply for Your Chosen Role</h3>
+
+      <p class="required-note">
+        Fields marked with <strong>*</strong> are required.
+      </p>
+
+      <form method="post" action="http://mercury.swin.edu.au/it000000/formtest.php">
+        <fieldset>
+          <legend>Position Information</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="jobref">Job Reference Number *</label>
+              <input
+                type="text"
+                id="jobref"
+                name="jobref"
+                required="required"
+                maxlength="5"
+                pattern="[A-Za-z0-9]{5}"
+                placeholder="e.g. ED123"
+              />
+              <p class="hint">Must be exactly 5 alphanumeric characters.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Personal Details</legend>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="firstname">First Name *</label>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                required="required"
+                maxlength="20"
+                pattern="[A-Za-z]{1,20}"
+                placeholder="Enter your first name"
+              />
+              <p class="hint">Maximum 20 alphabetic characters.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="lastname">Last Name *</label>
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                required="required"
+                maxlength="20"
+                pattern="[A-Za-z]{1,20}"
+                placeholder="Enter your last name"
+              />
+              <p class="hint">Maximum 20 alphabetic characters.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of Birth *</label>
+              <input
+                type="text"
+                id="dob"
+                name="dob"
+                required="required"
+                pattern="(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/[0-9]{4}"
+                placeholder="DD/MM/YYYY"
+              />
+              <p class="hint">Use the format DD/MM/YYYY.</p>
+            </div>
+
+            <fieldset class="form-group">
+              <legend>Gender *</legend>
+              <div class="option-group">
+                <label for="gender-male">
+                  <input type="radio" id="gender-male" name="gender" value="male" required="required" />
+                  Male
+                </label>
+
+                <label for="gender-female">
+                  <input type="radio" id="gender-female" name="gender" value="female" />
+                  Female
+                </label>
+
+                <label for="gender-nonbinary">
+                  <input type="radio" id="gender-nonbinary" name="gender" value="non-binary" />
+                  Non-binary
+                </label>
+
+                <label for="gender-prefernottosay">
+                  <input type="radio" id="gender-prefernottosay" name="gender" value="prefer-not-to-say" />
+                  Prefer not to say
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Address and Contact Details</legend>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="streetaddress">Street Address *</label>
+              <input
+                type="text"
+                id="streetaddress"
+                name="streetaddress"
+                required="required"
+                maxlength="40"
+                placeholder="Enter your street address"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="suburb">Suburb/Town *</label>
+              <input
+                type="text"
+                id="suburb"
+                name="suburb"
+                required="required"
+                maxlength="40"
+                placeholder="Enter your suburb or town"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="state">State/Territory *</label>
+              <select id="state" name="state" required="required">
+                <option value="">Please select</option>
+                <option value="VIC">Victoria</option>
+                <option value="NSW">New South Wales</option>
+                <option value="QLD">Queensland</option>
+                <option value="NT">Northern Territory</option>
+                <option value="WA">Western Australia</option>
+                <option value="SA">South Australia</option>
+                <option value="TAS">Tasmania</option>
+                <option value="ACT">Australian Capital Territory</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="postcode">Postcode *</label>
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                required="required"
+                maxlength="4"
+                pattern="[0-9]{4}"
+                placeholder="e.g. 3122"
+              />
+              <p class="hint">Must be exactly 4 digits.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required="required"
+                placeholder="name@example.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required="required"
+                pattern="[0-9]{8,12}"
+                placeholder="8 to 12 digits"
+              />
+              <p class="hint">Must contain 8 to 12 digits only.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Skills and Experience</legend>
+
+          <fieldset class="nested-fieldset">
+            <legend>Technical Skills *</legend>
+            <div class="option-group">
+              <label for="skill-html">
+                <input type="checkbox" id="skill-html" name="skills[]" value="HTML" />
+                HTML
+              </label>
+
+              <label for="skill-css">
+                <input type="checkbox" id="skill-css" name="skills[]" value="CSS" />
+                CSS
+              </label>
+
+              <label for="skill-accessibility">
+                <input type="checkbox" id="skill-accessibility" name="skills[]" value="Accessibility" />
+                Accessibility Design
+              </label>
+
+              <label for="skill-uiux">
+                <input type="checkbox" id="skill-uiux" name="skills[]" value="UI/UX" />
+                UI/UX Design
+              </label>
+
+              <label for="skill-content">
+                <input type="checkbox" id="skill-content" name="skills[]" value="Content Development" />
+                Content Development
+              </label>
+            </div>
+            <p class="hint">Select one or more relevant skills.</p>
+          </fieldset>
+
+          <div class="form-group">
+            <label for="otherskills">Other Skills</label>
+            <textarea
+              id="otherskills"
+              name="otherskills"
+              rows="6"
+              cols="40"
+              placeholder="List any additional skills, software knowledge, certifications, or relevant experience"
+            ></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Applicant Declaration</legend>
+          <div class="form-group">
+            <label for="declaration">
+              <input
+                type="checkbox"
+                id="declaration"
+                name="declaration"
+                value="agreed"
+                required="required"
+              />
+              I declare that the information provided in this application is accurate and complete. *
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="button-row">
+          <input type="submit" value="Submit Application" class="btn-primary" />
+          <input type="reset" value="Reset Form" class="btn-secondary" />
+        </div>
+      </form>
+    </section>
+
+    <aside class="support-panel">
+      <h3>Application Tips</h3>
+      <ul>
+        <li>Check your job reference number carefully before submitting.</li>
+        <li>Use a valid email address so our recruitment team can contact you.</li>
+        <li>Complete all required fields marked with an asterisk.</li>
+        <li>Review your answers before pressing Submit.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container">
+      <section aria-labelledby="acknowledgement-heading">
+        <h2 id="acknowledgement-heading" class="sr-only">Acknowledgement of Country</h2>
+        <p style="font-style: italic;">
+          PixelCraft acknowledges the Traditional Owners of the land on which we work and learn,
+          and we pay our respects to Elders past and present.
+        </p>
+      </section>
+
+      <p>&copy; 2026 PixelCraft. All rights reserved.</p>
+      <p>
+        <a href="mailto:fulingyuovo@gmail.com">fulingyuovo@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
