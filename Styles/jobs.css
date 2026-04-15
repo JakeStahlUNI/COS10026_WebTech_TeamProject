@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+  display: flex;          
+  align-items: center;  
+    padding: 30px 900px;
+  justify-content: space-between; 
+  background-color: white;
+}
+
+body {
+    background: linear-gradient(135deg, #4228eb 0%, #7d5fff 35%, #ca86cc 75%, #f2b0b0 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo { height: 40px; width: auto; }
+
+.search-and-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.search-bar input {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button {
+    padding: 6px 15px;
+    background-color: #2b6eff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+main {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; 
+}
+
+main > section:first-of-type {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+main > section:nth-of-type(2) {
+    background: transparent; 
+    box-shadow: none;
+    padding: 0;
+}
+
+main > section:nth-of-type(2) > h2 {
+    text-align: center;
+    color: white; 
+    margin-bottom: 20px;
+}
+
+.job-listing {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.job-listing h3 {
+    background-color: #3b82f6; 
+    color: white;
+    padding: 15px 25px;
+    margin: 0;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.job-listing p, .job-listing h4, .job-listing ul, .job-listing ol {
+    padding: 10px 25px;
+}
+
+.job-listing ul, .job-listing ol {
+    margin-left: 45px;
+    padding-bottom: 20px;
+}
+
+.footer {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-left a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin: 0 10px;
+}
