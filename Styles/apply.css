@@ -12,8 +12,7 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
-  color: #1f2933;
-  background: linear-gradient(to bottom, #f4f7fb, #ffffff);
+  background: radial-gradient(circle at top left, #6a11cb, #2575fc, #ff9a9e);
 }
 
 /* Layout */
@@ -25,12 +24,15 @@ body {
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #17324d, #24557a);
+  background-color: #ffffff;
   color: #ffffff;
   padding: 1.5rem 0;
   border-bottom: 4px solid #0f2233;
 }
-
+.logo {
+  width: 250px;
+  height: auto;
+}
 header h1 {
   font-size: 2rem;
   margin-bottom: 0.3rem;
