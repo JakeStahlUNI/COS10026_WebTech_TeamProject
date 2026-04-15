@@ -22,60 +22,96 @@ body {
   margin: 0 auto;
 }
 
-/* Header */
-header {
-  background-color: #ffffff;
-  color: #ffffff;
-  padding: 1.5rem 0;
-  border-bottom: 4px solid #0f2233;
-}
-.logo {
-  width: 250px;
-  height: auto;
-}
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.3rem;
+.header {
+  background: linear-gradient(135deg, #fefefe, #f8f8f9);
+  padding: 1rem 0;
+  border-bottom: 4px solid #24193d;
 }
 
-.tagline {
-  font-size: 1rem;
-  opacity: 0.95;
-  margin-bottom: 1rem;
-}
-
-.nav-list {
-  list-style: none;
+.header-container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+.search-and-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 0.9rem;
 }
 
-.nav-list li {
-  margin: 0;
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-.nav-list a {
-  display: inline-block;
+.nav-links a {
   text-decoration: none;
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 0.65rem 1rem;
-  border-radius: 999px;
+  color: #e90cda;
   font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.08);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.nav-list a:hover,
-.nav-list a:focus {
-  background-color: rgba(255, 255, 255, 0.2);
+.nav-links a:hover,
+.nav-links a:focus,
+.nav-links a[aria-current="page"] {
+  background-color: #ffffff;
+  color: #2d1f4f;
   transform: translateY(-1px);
 }
 
-.nav-list a[aria-current="page"] {
-  background-color: #ffffff;
-  color: #17324d;
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 }
+
+.search-bar input {
+  width: 220px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #d4caea;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.search-bar button {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #2d1f4f;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-bar button:hover,
+.search-bar button:focus {
+  background-color: #eee8fb;
+  transform: translateY(-1px);
+}
+
 
 /* Main */
 main {
@@ -385,7 +421,7 @@ td {
     grid-column: auto;
   }
 
-  .nav-list {
+  .nav-links {
     flex-direction: column;
     align-items: flex-start;
   }
