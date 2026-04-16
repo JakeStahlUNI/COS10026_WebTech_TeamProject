@@ -61,7 +61,7 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #e90cda;
+  color: #050005;
   font-weight: bold;
   font-size: 1.2rem;
   padding: 0.7rem 1.2rem;
@@ -292,20 +292,20 @@ textarea:focus {
 }
 
 .btn-primary {
-  background-color: #1f5d8b;
-  color: #ffffff;
+  background-color: #f9fafb;
+  color: #090909;
   box-shadow: 0 4px 10px rgba(31, 93, 139, 0.25);
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #17496d;
+  background-color: #8c1562;
   transform: translateY(-1px);
 }
 
 .btn-secondary {
   background-color: #e6edf5;
-  color: #17324d;
+  color: #0b0b0b;
   border: 1px solid #b8c8d8;
 }
 
@@ -328,7 +328,7 @@ textarea:focus {
 
 .support-panel h3 {
   margin-bottom: 0.8rem;
-  color: #17324d;
+  color: #080008;
   font-size: 1.2rem;
 }
 
@@ -338,13 +338,13 @@ textarea:focus {
 
 .support-panel li {
   margin-bottom: 0.7rem;
-  color: #334e68;
+  color: #090909;
 }
 
 /* Footer */
 footer {
-  background-color: #17324d;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 1.8rem 0;
   margin-top: 2rem;
 }
@@ -354,13 +354,13 @@ footer p {
 }
 
 footer a {
-  color: #d8ecff;
+  color: #000000;
   text-decoration: underline;
 }
 
 footer a:hover,
 footer a:focus {
-  color: #ffffff;
+  color: #a00d96ba;
 }
 
 /* Accessibility */
