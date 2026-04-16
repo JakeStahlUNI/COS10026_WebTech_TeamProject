@@ -1,222 +1,196 @@
-body 
-{
-  background: radial-gradient(circle at top left, #6a11cb, #2575fc, #ff9a9e);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #4e3ae4 0%, #7b61ff 50%, #f78da7 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .header {
-  display: flex;          
-  align-items: center;  
-  justify-content: space-between; 
-  padding: 10px 20px;
-  background-color: white;
+    background-color: white;
+    width: 100%;
+    padding: 10px 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo {
-  width: 250px;
-  height: auto;
+    height: 40px;
 }
 
 .search-and-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;       
-  font-family: Arial, sans-serif;       
-}
-
-.search-bar button 
-{ 
-  padding: 8px 16px; 
-  background-color: #2575fc; 
-  color: black; 
-  border: 2px solid white;
-  border-radius: 6px;
-  cursor: pointer; 
-  font-family: Arial, sans-serif;}
-
-.search-bar input {
-  padding: 5px;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .nav-links a {
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  color: black;
-  padding: 10px;
-  font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin-left: 15px;
+    font-size: 14px;
 }
 
-.content {
-  max-width: 900px;    
-  margin: 40px auto;     
-  padding: 30px;
-  background-color: white;
-  border-radius: 12px;       
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
-  text-align: center;
+.search-bar input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px 0 0 2px;
+    outline: none;
 }
 
-.content h1 {
-  font-size: 36px;
-  font-family: Arial, sans-serif;
-  margin-bottom: 15px;
+.search-bar button {
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
 }
 
-.content p 
-{
-  font-size: 18px;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 25px;
+main {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 50px;
+    margin-bottom: 80px;
 }
 
-.content img 
-{
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+section:first-of-type {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
 }
 
-.content img:hover 
-{
-  transform: scale(1.05);
+section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #222;
 }
 
-table {
-  width: 80%;
-  max-width: 800px;
-  margin: 40px auto;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  box-shadow: 
-    0 0 0 5px white, 
-    0 8px 20px rgba(0,0,0,0.1);
+section p {
+    color: #555;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Header row */
-th {
-  background-color:#2575fc;
-  color: white;
-  font-size: 22px;
-  padding: 15px;
-  text-transform: uppercase;
+.job-listing, aside {
+    background: white;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
-/* Table cells */
-td {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
+.job-listing h3, .available-title, aside h3 {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
-/* Left column (service names) */
-td:first-child {
-  font-weight: bold;
-  width: 30%;
-}
-
-/* Hover effect for rows */
-tr:hover td {
-  background-color: #f5f5f5;
+.job-listing h4, .job-listing p, .job-listing ul, .job-listing ol {
+    padding: 10px 25px;
+    color: #444;
 }
 
 .footer {
-  background: white;
-  color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: Arial, sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    backdrop-filter: blur(5px);
 }
 
-/* Left side links */
 .footer-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+    font-size: 12px;
+    color: white;
 }
 
 .footer-left a {
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.footer-left a:hover {
-  opacity: 0.7;
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
 }
 
 .footer-left span {
-  opacity: 0.6;
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.about {
-  max-width: 1200px;
-  margin: 40px auto;     
-  padding: 30px;
-  background-color: white;
-  border-radius: 12px;       
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
-  font-family: Arial, sans-serif;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 20px;
 }
 
-.about h2 {
-  display: flex;
+.job-listing {
+    background: white;
+    width: 100%;
+    max-width: 700px;
+    padding: 40px; 
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    text-align: center; 
 }
 
-.about hr {
-  color: black;
+.job-listing h3 {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px; 
 }
 
-.about dl{
-  margin-bottom: 0.5rem;
+.job-listing p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #444;
 }
 
-
-.about dt{
-  color: #333;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
+.job-listing h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #222;
 }
 
-.about dd{
-  margin-bottom: 8px;
+.job-listing ul, 
+.job-listing ol {
+    list-style-position: inside; 
+    display: inline-block; 
+    text-align: left; 
+    font-size: 14px;
+    color: #555;
 }
 
-.aboutTable{
-  width: 100% !important;
-  max-width: none !important;
-}
-
-.about thead{
-  background-color: #2575fc;
-
-}
-
-.about a{
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-.footerLink{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-}
-
-.flag{
-  width: 100px;
-  justify-content: space-between;
-  align-items: center;
+.job-listing li {
+    margin-bottom: 8px;
 }
