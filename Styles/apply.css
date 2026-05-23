@@ -488,3 +488,14 @@ td {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.field-error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  min-height: 1.2rem;
+}
+
+.input-error {
+  border: 2px solid #d9534f !important;
+  background-color: #fff5f5;
+}

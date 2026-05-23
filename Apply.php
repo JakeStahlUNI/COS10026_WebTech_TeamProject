@@ -17,7 +17,7 @@
     <div class="header-container">
 <<<<<<< HEAD
       <a href="index.php">
-        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
+        <img src="Images/Logo.png" alt="PixelCraft Logo" class="logo"/>
       </a>
 
       <div class="search-and-nav">
@@ -125,16 +125,19 @@
             </div>
 
             <div class="form-group">
-              <label for="dob">Date of Birth *</label>
-              <input
-                type="text"
-                id="dob"
-                name="dob"
-                maxlength="10"
-                placeholder="DD/MM/YYYY"
-              />
-              <p class="hint">Use the format DD/MM/YYYY.</p>
-            </div>
+          <label for="dob">Date of Birth *</label>
+       <input
+    type="text"
+    id="dob"
+    name="dob"
+    maxlength="10"
+    placeholder="DD/MM/YYYY"
+    inputmode="numeric"
+    autocomplete="bday"
+  />
+  <p class="hint">Use the format DD/MM/YYYY.</p>
+  <p id="dob-error" class="field-error"></p>
+</div>
 
             <fieldset class="form-group">
               <legend>Gender *</legend>
@@ -340,5 +343,65 @@
       </p>
     </div>
   </footer>
+  <script>
+  const dobInput = document.getElementById("dob");
+  const dobError = document.getElementById("dob-error");
+
+  function validateDOB(value) {
+    const dobPattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+    if (value.length === 0) {
+      return "";
+    }
+
+    if (value.length < 10) {
+      return "Please enter the full date in DD/MM/YYYY format.";
+    }
+
+    if (!dobPattern.test(value)) {
+      return "Invalid date format. Please use DD/MM/YYYY.";
+    }
+
+    return "";
+  }
+
+  dobInput.addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // remove non-digits
+
+    if (value.length > 8) {
+      value = value.slice(0, 8);
+    }
+
+    if (value.length > 4) {
+      value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
+    } else if (value.length > 2) {
+      value = value.slice(0, 2) + "/" + value.slice(2);
+    }
+
+    e.target.value = value;
+
+    const errorMessage = validateDOB(value);
+
+    if (errorMessage !== "") {
+      dobError.textContent = errorMessage;
+      dobInput.classList.add("input-error");
+    } else {
+      dobError.textContent = "";
+      dobInput.classList.remove("input-error");
+    }
+  });
+
+  dobInput.addEventListener("blur", function () {
+    const errorMessage = validateDOB(dobInput.value);
+
+    if (errorMessage !== "") {
+      dobError.textContent = errorMessage;
+      dobInput.classList.add("input-error");
+    } else {
+      dobError.textContent = "";
+      dobInput.classList.remove("input-error");
+    }
+  });
+</script>
 </body>
 </html>
