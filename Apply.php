@@ -16,15 +16,15 @@
 <body>
 <header class="header">
     <div class="header-container">
-        <a href="index.html">
+        <a href="index.php" class="logo-link">
             <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
         </a>
 
         <div class="search-and-nav">
             <nav class="nav-links">
-                <a href="about.html">About</a>
-                <a href="Jobs.html">Jobs</a>
-                <a href="Apply.html">Apply</a>
+                <a href="about.php">About</a>
+                <a href="Jobs.php">Jobs</a>
+                <a href="Apply.php">Apply</a>
             </nav>
             <div class="search-bar">
                 <input type="text" placeholder="Search..">

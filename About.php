@@ -8,15 +8,15 @@
 </head>
 
 <header class="header">
-  <a href="Images/Logo.png">
-    <img src="images/Logo.png" alt="Jake" class="logo">
+  <a href="index.php" class="logo-link">
+    <img src="images/Logo.png" alt="PixelCraft" class="logo">
   </a>
 
   <div class="search-and-nav">
     <nav class="nav-links">
-      <a href="about.html">About</a>
-      <a href="Jobs.html">Jobs</a>
-      <a href="Apply.html">Apply</a>
+      <a href="about.php">About</a>
+      <a href="Jobs.php">Jobs</a>
+      <a href="Apply.php">Apply</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search..">
