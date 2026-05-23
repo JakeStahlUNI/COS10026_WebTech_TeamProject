@@ -15,6 +15,7 @@
   <!-- Header -->
   <header class="header">
     <div class="header-container">
+<<<<<<< HEAD
       <a href="index.php">
         <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
       </a>
@@ -29,6 +30,22 @@
           <label for="site-search" class="sr-only">Search the site</label>
           <input type="text" id="site-search" name="site-search" placeholder="Search.." maxlength="40">
           <button type="button">Search</button>
+=======
+        <a href="index.php" class="logo-link">
+            <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
+        </a>
+
+        <div class="search-and-nav">
+            <nav class="nav-links">
+                <a href="about.php">About</a>
+                <a href="Jobs.php">Jobs</a>
+                <a href="Apply.php">Apply</a>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..">
+                <button type="submit">Search</button>
+            </div>
+
         </div>
       </div>
     </div>
