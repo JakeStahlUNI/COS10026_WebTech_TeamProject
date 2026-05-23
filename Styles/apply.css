@@ -460,3 +460,31 @@ td {
     padding: 1rem;
   }
 }
+.error-box {
+  background-color: #fff1f1;
+  border: 1px solid #d9534f;
+  color: #8a1f1f;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.success-box {
+  background-color: #eef9f0;
+  border: 1px solid #4caf50;
+  color: #1f5f2a;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

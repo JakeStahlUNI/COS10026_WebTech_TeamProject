@@ -9,37 +9,37 @@
   <title>Apply | PixelCraft</title>
 
   <link rel="stylesheet" href="styles/apply.css" />
-
-  
 </head>
 
 <body>
-<header class="header">
+  <!-- Header -->
+  <header class="header">
     <div class="header-container">
-        <a href="index.html">
-            <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
-        </a>
+      <a href="index.php">
+        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
+      </a>
 
-        <div class="search-and-nav">
-            <nav class="nav-links">
-                <a href="about.html">About</a>
-                <a href="Jobs.html">Jobs</a>
-                <a href="Apply.html">Apply</a>
-            </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..">
-                <button type="submit">Search</button>
-            </div>
+      <div class="search-and-nav">
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="about.php">About</a>
+          <a href="jobs.php">Jobs</a>
+          <a href="apply.php" aria-current="page">Apply</a>
+        </nav>
+        <div class="search-bar">
+          <label for="site-search" class="sr-only">Search the site</label>
+          <input type="text" id="site-search" name="site-search" placeholder="Search.." maxlength="40">
+          <button type="button">Search</button>
         </div>
+      </div>
     </div>
-</header>
+  </header>
 
   <main class="container">
     <section class="page-banner">
       <h2>Job Application Form</h2>
       <p>
-        Thank you for your interest in joining EduNova Careers. Please complete the form below carefully.
-        All fields are required except the <strong>Other Skills</strong> text area.
+        Thank you for your interest in joining PixelCraft. Please complete the form below carefully.
+        All application records will be processed securely on the server side.
       </p>
     </section>
 
@@ -50,7 +50,19 @@
         Fields marked with <strong>*</strong> are required.
       </p>
 
-      <form method="post" action="http://mercury.swin.edu.au/it000000/formtest.php">
+      <?php
+        if (isset($_GET['error'])) {
+          echo "<div class='error-box'><p><strong>Submission failed.</strong> Please check your input and try again.</p></div>";
+        }
+
+        if (isset($_GET['success']) && isset($_GET['eoi'])) {
+          $safe_eoi = htmlspecialchars($_GET['eoi']);
+          echo "<div class='success-box'><p><strong>Application submitted successfully.</strong> Your EOI Number is <strong>$safe_eoi</strong>.</p></div>";
+        }
+      ?>
+
+      <!-- Project 2 requires server-side validation -->
+      <form method="post" action="process_eoi.php" novalidate>
         <fieldset>
           <legend>Position Information</legend>
           <div class="form-grid">
@@ -60,10 +72,8 @@
                 type="text"
                 id="jobref"
                 name="jobref"
-                required="required"
                 maxlength="5"
-                pattern="[A-Za-z0-9]{5}"
-                placeholder="e.g. ED123"
+                placeholder="e.g. PC123"
               />
               <p class="hint">Must be exactly 5 alphanumeric characters.</p>
             </div>
@@ -79,9 +89,7 @@
                 type="text"
                 id="firstname"
                 name="firstname"
-                required="required"
                 maxlength="20"
-                pattern="[A-Za-z]{1,20}"
                 placeholder="Enter your first name"
               />
               <p class="hint">Maximum 20 alphabetic characters.</p>
@@ -93,9 +101,7 @@
                 type="text"
                 id="lastname"
                 name="lastname"
-                required="required"
                 maxlength="20"
-                pattern="[A-Za-z]{1,20}"
                 placeholder="Enter your last name"
               />
               <p class="hint">Maximum 20 alphabetic characters.</p>
@@ -107,8 +113,7 @@
                 type="text"
                 id="dob"
                 name="dob"
-                required="required"
-                pattern="(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/[0-9]{4}"
+                maxlength="10"
                 placeholder="DD/MM/YYYY"
               />
               <p class="hint">Use the format DD/MM/YYYY.</p>
@@ -118,7 +123,7 @@
               <legend>Gender *</legend>
               <div class="option-group">
                 <label for="gender-male">
-                  <input type="radio" id="gender-male" name="gender" value="male" required="required" />
+                  <input type="radio" id="gender-male" name="gender" value="male" />
                   Male
                 </label>
 
@@ -150,10 +155,10 @@
                 type="text"
                 id="streetaddress"
                 name="streetaddress"
-                required="required"
                 maxlength="40"
                 placeholder="Enter your street address"
               />
+              <p class="hint">Maximum 40 characters.</p>
             </div>
 
             <div class="form-group">
@@ -162,15 +167,15 @@
                 type="text"
                 id="suburb"
                 name="suburb"
-                required="required"
                 maxlength="40"
                 placeholder="Enter your suburb or town"
               />
+              <p class="hint">Maximum 40 characters.</p>
             </div>
 
             <div class="form-group">
               <label for="state">State/Territory *</label>
-              <select id="state" name="state" required="required">
+              <select id="state" name="state">
                 <option value="">Please select</option>
                 <option value="VIC">Victoria</option>
                 <option value="NSW">New South Wales</option>
@@ -189,9 +194,7 @@
                 type="text"
                 id="postcode"
                 name="postcode"
-                required="required"
                 maxlength="4"
-                pattern="[0-9]{4}"
                 placeholder="e.g. 3122"
               />
               <p class="hint">Must be exactly 4 digits.</p>
@@ -200,22 +203,22 @@
             <div class="form-group">
               <label for="email">Email Address *</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 name="email"
-                required="required"
+                maxlength="50"
                 placeholder="name@example.com"
               />
+              <p class="hint">Please enter a valid email address.</p>
             </div>
 
             <div class="form-group">
               <label for="phone">Phone Number *</label>
               <input
-                type="tel"
+                type="text"
                 id="phone"
                 name="phone"
-                required="required"
-                pattern="[0-9]{8,12}"
+                maxlength="12"
                 placeholder="8 to 12 digits"
               />
               <p class="hint">Must contain 8 to 12 digits only.</p>
@@ -227,7 +230,7 @@
           <legend>Skills and Experience</legend>
 
           <fieldset class="nested-fieldset">
-            <legend>Technical Skills *</legend>
+            <legend>Technical Skills</legend>
             <div class="option-group">
               <label for="skill-html">
                 <input type="checkbox" id="skill-html" name="skills[]" value="HTML" />
@@ -240,12 +243,12 @@
               </label>
 
               <label for="skill-accessibility">
-                <input type="checkbox" id="skill-accessibility" name="skills[]" value="Accessibility" />
+                <input type="checkbox" id="skill-accessibility" name="skills[]" value="Accessibility Design" />
                 Accessibility Design
               </label>
 
               <label for="skill-uiux">
-                <input type="checkbox" id="skill-uiux" name="skills[]" value="UI/UX" />
+                <input type="checkbox" id="skill-uiux" name="skills[]" value="UI/UX Design" />
                 UI/UX Design
               </label>
 
@@ -264,8 +267,10 @@
               name="otherskills"
               rows="6"
               cols="40"
+              maxlength="300"
               placeholder="List any additional skills, software knowledge, certifications, or relevant experience"
             ></textarea>
+            <p class="hint">Maximum 300 characters.</p>
           </div>
         </fieldset>
 
@@ -278,7 +283,6 @@
                 id="declaration"
                 name="declaration"
                 value="agreed"
-                required="required"
               />
               I declare that the information provided in this application is accurate and complete. *
             </label>
@@ -297,7 +301,7 @@
       <ul>
         <li>Check your job reference number carefully before submitting.</li>
         <li>Use a valid email address so our recruitment team can contact you.</li>
-        <li>Complete all required fields marked with an asterisk.</li>
+        <li>Complete all required fields before submission.</li>
         <li>Review your answers before pressing Submit.</li>
       </ul>
     </aside>

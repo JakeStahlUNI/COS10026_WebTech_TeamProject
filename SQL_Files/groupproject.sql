@@ -24,26 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `apply`
+-- Table structure for table `eoi`
 --
 
-CREATE TABLE `apply` (
-  `jobref` varchar(5) NOT NULL,
-  `firstname` varchar(20) NOT NULL,
-  `lastname` varchar(20) NOT NULL,
-  `job` varchar(10) NOT NULL,
-  `gender` varchar(20) NOT NULL,
-  `streetaddress` varchar(40) NOT NULL,
-  `suburb` varchar(40) NOT NULL,
-  `state` varchar(3) NOT NULL,
-  `postcode` varchar(4) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `skill` text DEFAULT NULL,
-  `otherskill` varchar(300) NOT NULL,
-  `declaration` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+CREATE TABLE eoi (
+  EOInumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  jobref VARCHAR(5) NOT NULL,
+  firstname VARCHAR(20) NOT NULL,
+  lastname VARCHAR(20) NOT NULL,
+  dob VARCHAR(10) NOT NULL,
+  gender VARCHAR(20) NOT NULL,
+  streetaddress VARCHAR(40) NOT NULL,
+  suburb VARCHAR(40) NOT NULL,
+  state VARCHAR(3) NOT NULL,
+  postcode VARCHAR(4) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  phone VARCHAR(12) NOT NULL,
+  skills TEXT DEFAULT NULL,
+  otherskills VARCHAR(300) DEFAULT NULL,
+  declaration VARCHAR(10) NOT NULL,
+  status ENUM('New', 'Current', 'Final') NOT NULL DEFAULT 'New'
+);
 -- --------------------------------------------------------
 
 --
