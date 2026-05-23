@@ -12,12 +12,10 @@
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="header-container">
-<<<<<<< HEAD
       <a href="index.php">
-        <img src="Images/Logo.png" alt="PixelCraft Logo" class="logo"/>
+        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
       </a>
 
       <div class="search-and-nav">
@@ -30,22 +28,6 @@
           <label for="site-search" class="sr-only">Search the site</label>
           <input type="text" id="site-search" name="site-search" placeholder="Search.." maxlength="40">
           <button type="button">Search</button>
-=======
-        <a href="index.php" class="logo-link">
-            <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
-        </a>
-
-        <div class="search-and-nav">
-            <nav class="nav-links">
-                <a href="about.php">About</a>
-                <a href="Jobs.php">Jobs</a>
-                <a href="Apply.php">Apply</a>
-            </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..">
-                <button type="submit">Search</button>
-            </div>
-
         </div>
       </div>
     </div>
@@ -78,7 +60,6 @@
         }
       ?>
 
-      <!-- Project 2 requires server-side validation -->
       <form method="post" action="process_eoi.php" novalidate>
         <fieldset>
           <legend>Position Information</legend>
@@ -125,19 +106,19 @@
             </div>
 
             <div class="form-group">
-          <label for="dob">Date of Birth *</label>
-       <input
-    type="text"
-    id="dob"
-    name="dob"
-    maxlength="10"
-    placeholder="DD/MM/YYYY"
-    inputmode="numeric"
-    autocomplete="bday"
-  />
-  <p class="hint">Use the format DD/MM/YYYY.</p>
-  <p id="dob-error" class="field-error"></p>
-</div>
+              <label for="dob">Date of Birth *</label>
+              <input
+                type="text"
+                id="dob"
+                name="dob"
+                maxlength="10"
+                placeholder="DD/MM/YYYY"
+                inputmode="numeric"
+                autocomplete="bday"
+              />
+              <p class="hint">Use the format DD/MM/YYYY and do not enter a future date.</p>
+              <p id="dob-error" class="field-error"></p>
+            </div>
 
             <fieldset class="form-group">
               <legend>Gender *</legend>
@@ -343,65 +324,88 @@
       </p>
     </div>
   </footer>
+
   <script>
-  const dobInput = document.getElementById("dob");
-  const dobError = document.getElementById("dob-error");
+    const dobInput = document.getElementById("dob");
+    const dobError = document.getElementById("dob-error");
 
-  function validateDOB(value) {
-    const dobPattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    function validateDOB(value) {
+      const dobPattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
-    if (value.length === 0) {
+      if (value.length === 0) {
+        return "";
+      }
+
+      if (value.length < 10) {
+        return "Please enter the full date in DD/MM/YYYY format.";
+      }
+
+      if (!dobPattern.test(value)) {
+        return "Invalid date format. Please use DD/MM/YYYY.";
+      }
+
+      const parts = value.split("/");
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+
+      const inputDate = new Date(year, month, day);
+      const today = new Date();
+
+      today.setHours(0, 0, 0, 0);
+
+      if (
+        inputDate.getFullYear() !== year ||
+        inputDate.getMonth() !== month ||
+        inputDate.getDate() !== day
+      ) {
+        return "Please enter a valid calendar date.";
+      }
+
+      if (inputDate > today) {
+        return "Date of birth cannot be later than today.";
+      }
+
       return "";
     }
 
-    if (value.length < 10) {
-      return "Please enter the full date in DD/MM/YYYY format.";
-    }
+    dobInput.addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
 
-    if (!dobPattern.test(value)) {
-      return "Invalid date format. Please use DD/MM/YYYY.";
-    }
+      if (value.length > 8) {
+        value = value.slice(0, 8);
+      }
 
-    return "";
-  }
+      if (value.length > 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
+      } else if (value.length > 2) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+      }
 
-  dobInput.addEventListener("input", function (e) {
-    let value = e.target.value.replace(/\D/g, ""); // remove non-digits
+      e.target.value = value;
 
-    if (value.length > 8) {
-      value = value.slice(0, 8);
-    }
+      const errorMessage = validateDOB(value);
 
-    if (value.length > 4) {
-      value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
-    } else if (value.length > 2) {
-      value = value.slice(0, 2) + "/" + value.slice(2);
-    }
+      if (errorMessage !== "") {
+        dobError.textContent = errorMessage;
+        dobInput.classList.add("input-error");
+      } else {
+        dobError.textContent = "";
+        dobInput.classList.remove("input-error");
+      }
+    });
 
-    e.target.value = value;
+    dobInput.addEventListener("blur", function () {
+      const errorMessage = validateDOB(dobInput.value);
 
-    const errorMessage = validateDOB(value);
-
-    if (errorMessage !== "") {
-      dobError.textContent = errorMessage;
-      dobInput.classList.add("input-error");
-    } else {
-      dobError.textContent = "";
-      dobInput.classList.remove("input-error");
-    }
-  });
-
-  dobInput.addEventListener("blur", function () {
-    const errorMessage = validateDOB(dobInput.value);
-
-    if (errorMessage !== "") {
-      dobError.textContent = errorMessage;
-      dobInput.classList.add("input-error");
-    } else {
-      dobError.textContent = "";
-      dobInput.classList.remove("input-error");
-    }
-  });
-</script>
+      if (errorMessage !== "") {
+        dobError.textContent = errorMessage;
+        dobInput.classList.add("input-error");
+      } else {
+        dobError.textContent = "";
+        dobInput.classList.remove("input-error");
+      }
+    });
+  </script>
 </body>
 </html>
