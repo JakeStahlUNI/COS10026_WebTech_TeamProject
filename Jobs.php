@@ -20,7 +20,7 @@ function sanitise_input($data) {
 
 /* -------------------- Connect to database -------------------- */
 // Uses the dynamically verified configuration elements safely
-$conn = @mysqli_connect($database_host, $database_user, $database_password, $database_name);
+$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
