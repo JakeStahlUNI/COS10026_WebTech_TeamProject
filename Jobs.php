@@ -1,5 +1,5 @@
 <?php
-// Load your group's central credential settings file
+// Load your group's centralized database credentials file
 require_once("settings.php");
 
 /* -------------------- Helper function -------------------- */
@@ -11,7 +11,7 @@ function sanitise_input($data) {
 }
 
 /* -------------------- Connect to database -------------------- */
-// Using the exact procedural variables ($host, $user, $pwd, $sql_db) from your settings file
+// Uses the procedural connection format matching your process_eoi.php pattern
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
@@ -26,7 +26,7 @@ if (isset($_GET['search'])) {
 
 /* -------------------- Execute Prepared Statements -------------------- */
 if ($search_query !== "") {
-    // Searches against your case-sensitive columns 'Title' or 'Description'
+    // Searches against your case-sensitive columns: Title or Description
     $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
     $stmt = mysqli_prepare($conn, $search_sql);
     
@@ -37,9 +37,11 @@ if ($search_query !== "") {
     $search_param = "%" . $search_query . "%";
     mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
     mysqli_stmt_execute($stmt);
+    
+    // Correctly fetches the result set resource out of the executed statement object
     $result = mysqli_stmt_get_result($stmt);
 } else {
-    // Fallback if search string is empty or unsubmitted
+    // Fallback if no search query is active
     $sql = "SELECT * FROM jobs";
     $result = mysqli_query($conn, $sql);
 }
@@ -77,7 +79,7 @@ if ($search_query !== "") {
     <h1>Available Positions</h1>
 
     <?php
-    // Loop out retrieved job records dynamically
+    // Verify that data rows were retrieved out of your table resource execution
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             ?>
@@ -92,7 +94,7 @@ if ($search_query !== "") {
                 <h3>Key Responsibilities</h3>
                 <ul>
                     <?php 
-                    // Explodes multi-line database blocks back into item nodes cleanly
+                    // Explodes multi-line database blocks back into item bullets cleanly
                     $responsibilities = explode("\n", trim($row['Responsibilities']));
                     foreach ($responsibilities as $line) {
                         if (!empty(trim($line))) {
@@ -105,7 +107,7 @@ if ($search_query !== "") {
                 <h3>Qualifications</h3>
                 <ul>
                     <?php 
-                    // Explodes multi-line qualification blocks into separate layout points
+                    // Explodes multi-line database entries into individual HTML list item loops
                     $qualifications = explode("\n", trim($row['Qualifications']));
                     foreach ($qualifications as $line) {
                         if (!empty(trim($line))) {
@@ -121,13 +123,13 @@ if ($search_query !== "") {
             <?php
         }
     } else {
-        // Safe display output if keyword yields 0 entries
+        // Output graceful text state if search results contain 0 item records
         echo "<p>No positions found matching your criteria.</p>";
         echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p>";
     }
 
-    // Free results and close the connection resource cleanups
-    if (isset($stmt) && $stmt) {
+    // Clean up statement resource handles and terminate database connection loop
+    if (isset($stmt) && $search_query !== "") {
         mysqli_stmt_close($stmt);
     }
     mysqli_close($conn);
