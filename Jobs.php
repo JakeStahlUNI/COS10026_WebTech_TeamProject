@@ -1,6 +1,14 @@
 <?php
-// 1. Load your central database credentials file
-require_once("settings.php");
+/* -------------------- Central Settings Inclusion -------------------- */
+if (file_exists("settings.php")) {
+    require_once("settings.php");
+}
+
+// Fallback configuration layer if variables are not predefined or named differently
+$database_host     = isset($host) ? $host : "127.0.0.1";
+$database_user     = isset($user) ? $user : "root";
+$database_password = isset($pwd) ? $pwd : (isset($password) ? $password : "");
+$database_name     = isset($sql_db) ? $sql_db : (isset($dbname) ? $dbname : "groupproject");
 
 /* -------------------- Helper function -------------------- */
 function sanitise_input($data) {
@@ -11,8 +19,8 @@ function sanitise_input($data) {
 }
 
 /* -------------------- Connect to database -------------------- */
-// Establishes a standard procedural connection link
-$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+// Uses the dynamically verified configuration elements safely
+$conn = @mysqli_connect($database_host, $database_user, $database_password, $database_name);
 
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
@@ -26,7 +34,7 @@ if (isset($_GET['search'])) {
 
 /* -------------------- Execute Prepared Statements -------------------- */
 if ($search_query !== "") {
-    // Queries data across your real case-sensitive database columns
+    // Queries data across your real case-sensitive database columns: Title or Description
     $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
     $stmt = mysqli_prepare($conn, $search_sql);
     
@@ -79,7 +87,7 @@ if ($search_query !== "") {
     <h1>Available Positions</h1>
 
     <?php
-    // 2. Safely verify data rows and map out elements iteratively using procedural fetchers
+    // Safely verify data rows and map out elements iteratively using procedural fetchers
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             ?>
@@ -128,7 +136,7 @@ if ($search_query !== "") {
         echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p>";
     }
 
-    // 3. Close references and release connection assets cleanly
+    // Close references and release connection assets cleanly
     if (isset($stmt) && $search_query !== "") {
         mysqli_stmt_close($stmt);
     }
