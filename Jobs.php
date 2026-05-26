@@ -1,110 +1,114 @@
+<?php
+$host = "127.0.0.1";
+$user = "root";
+$password = "";
+$dbname = "groupproject";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Database Connection Failed: " . $conn->connect_error);
+}
+
+$search_query = "";
+if (isset($_GET['search'])) {
+    $search_query = trim($_GET['search']);
+}
+
+if (!empty($search_query)) {
+    // Search filters through Title, Reference Code, or Description
+    $stmt = $conn->prepare("SELECT * FROM jobs WHERE title LIKE ? OR job_reference LIKE ? OR description LIKE ?");
+    $search_param = "%" . $search_query . "%";
+    $stmt->bind_param("sss", $search_param, $search_param, $search_param);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $sql = "SELECT * FROM jobs";
+    $result = $conn->query($sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelCraft Careers</title>
-    <link rel="stylesheet" href="styles/jobs.css">
+    <title>PixelCraft Agency - Jobs</title>
 </head>
-
 <body>
 
-<header class="header">
-    <a href="index.php" class="logo-link">
-        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
-    </a>
-
-    <div class="search-and-nav">
-        <nav class="nav-links">
-            <a href="about.php">About</a>
-            <a href="Jobs.php">Jobs</a>
-            <a href="Apply.php">Apply</a>
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Search..">
+<header>
+    <div>PixelCraft</div>
+    <nav>
+        <a href="#">about</a>
+        <a href="#">jobs</a>
+        <a href="#">apply</a>
+        
+        <form action="jobs.php" method="GET" style="display: inline;">
+            <input type="text" name="search" placeholder="Search positions..." value="<?php echo htmlspecialchars($search_query); ?>">
             <button type="submit">Search</button>
-        </div>
-    </div>
+        </form>
+    </nav>
 </header>
 
 <main>
-    <section>
+    <div>
         <h2>Join PixelCraft</h2>
-        <p>
-            A creative agency providing web design, branding, and digital content services.
-            We are recruiting front-end developers and designers to support client-focused web projects.
-        </p>
-    </section>
+        <p>A creative agency providing web design, branding, and digital content services. We are recruiting front-end developers and designers to support client-focused web projects.</p>
+    </div>
 
-    <section>
-        <h2>Available Positions</h2>
+    <h3>Available Positions</h3>
 
-        <section class="job-listing">
-            <h3>FE123 – Front-End Developer</h3>
-            <p><strong>Description:</strong> Develop responsive and interactive web interfaces for client projects.</p>
-            <p><strong>Salary:</strong> $75,000 – $90,000 AUD</p>
-            <p><strong>Reports to:</strong> Lead Developer</p>
+    <?php
+    if ($result && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            ?>
+            <section>
+                <h4><?php echo htmlspecialchars($row['job_reference'] . ' - ' . $row['title']); ?></h4>
+                
+                <p><strong>Description:</strong> <?php echo htmlspecialchars($row['description']); ?></p>
+                <p><strong>Salary:</strong> <?php echo htmlspecialchars($row['salary_range']); ?></p>
+                <p><strong>Reports to:</strong> <?php echo htmlspecialchars($row['reports_to']); ?></p>
 
-            <h4>Key Responsibilities</h4>
-            <ul>
-                <li>Build responsive websites using HTML, CSS, and JavaScript</li>
-                <li>Collaborate with designers and back-end developers</li>
-                <li>Optimise applications for performance and usability</li>
-            </ul>
+                <h5>Key Responsibilities</h5>
+                <ul>
+                    <?php 
+                    // Converts database lines back into single bullet points
+                    $resp_items = explode("\n", trim($row['responsibilities']));
+                    foreach ($resp_items as $item) {
+                        if (!empty(trim($item))) {
+                            echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
+                        }
+                    }
+                    ?>
+                </ul>
 
-            <h4>Requirements</h4>
-            <ol>
-                <li><strong>Essential:</strong> Experience with HTML, CSS, and JavaScript</li>
-                <li><strong>Essential:</strong> Understanding of responsive design</li>
-                <li><strong>Preferable:</strong> Experience with React or similar frameworks</li>
-                <li><strong>Preferable:</strong> Knowledge of version control (Git)</li>
-            </ol>
-        </section>
+                <h5>Requirements</h5>
+                <ul>
+                    <?php 
+                    // Converts database lines back into requirements listings
+                    $req_items = explode("\n", trim($row['requirements']));
+                    foreach ($req_items as $item) {
+                        if (!empty(trim($item))) {
+                            echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
+                        }
+                    }
+                    ?>
+                </ul>
+            </section>
+            <hr>
+            <?php
+        }
+    } else {
+        echo "<p>No positions found matching your criteria.</p>";
+        echo "<p><a href='jobs.php'>Clear Search Criteria</a></p>";
+    }
+    $conn->close();
+    ?>
 
-        <section class="job-listing">
-            <h3>UX789 – UI/UX Designer</h3>
-            <p><strong>Description:</strong> Design engaging user experiences and interfaces for web and mobile platforms.</p>
-            <p><strong>Salary:</strong> $70,000 – $85,000 AUD</p>
-            <p><strong>Reports to:</strong> Creative Director</p>
-
-            <h4>Key Responsibilities</h4>
-            <ul>
-                <li>Create wireframes, prototypes, and design systems</li>
-                <li>Conduct user research and usability testing</li>
-                <li>Collaborate with developers to implement designs</li>
-            </ul>
-
-            <h4>Requirements</h4>
-            <ol>
-                <li><strong>Essential:</strong> Proficiency in Figma or Adobe XD</li>
-                <li><strong>Essential:</strong> Strong portfolio of UI/UX work</li>
-                <li><strong>Preferable:</strong> Knowledge of front-end technologies</li>
-                <li><strong>Preferable:</strong> Experience in agile teams</li>
-            </ol>
-        </section>
-
-        <aside>
-            <h3>Why Work With Us?</h3>
-            <p>
-                PixelCraft offers a collaborative environment, flexible working arrangements,
-                and opportunities to work on diverse creative projects across multiple industries.
-            </p>
-        </aside>
-    </section>
+    <footer>
+        <h3>Why Work With Us?</h3>
+        <p>PixelCraft offers a collaborative environment, flexible working arrangements, and opportunities to work on diverse client projects.</p>
+    </footer>
 </main>
-
-<footer class="footer">
-  <div class="footer-left">
-    <a href="https://105676558cos10026.atlassian.net/jira/software/projects/DEV/boards/1">Jira Project</a>
-    <span>›</span>
-    <a href="https://github.com/JakeStahlUNI/COS10026_WebTech_TeamProject">GitHub Repository</a>
-    <span>›</span>
-    <a href="mailto:info@pixelcraft.com">Contact us at info@pixelcraft.com</a>
-  </div>
-</footer>
-
 
 </body>
 </html>
