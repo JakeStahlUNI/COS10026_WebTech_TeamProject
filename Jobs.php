@@ -52,7 +52,7 @@ if ($search_query !== "") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs | PixelCraft</title>
-    <link rel="stylesheet" href="jobs.css">
+    <link rel="stylesheet" href="Styles/jobs.css">
 </head>
 <body>
 
