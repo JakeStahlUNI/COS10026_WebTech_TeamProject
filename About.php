@@ -7,23 +7,9 @@
     <link rel="stylesheet" href="styles/Index.css">
 </head>
 
-<header class="header">
-  <a href="index.php" class="logo-link">
-    <img src="images/Logo.png" alt="PixelCraft" class="logo">
-  </a>
+<?php include 'header.inc'; ?>
 
-  <div class="search-and-nav">
-    <nav class="nav-links">
-      <a href="about.php">About</a>
-      <a href="Jobs.php">Jobs</a>
-      <a href="Apply.php">Apply</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Search..">
-      <button type="submit">Search</button>
-    </div>
-  </div>
-</header>
+
 <div class="about">
     <h2>Group Detail</h2>
     <hr>
@@ -127,19 +113,6 @@
     </table>
 </div>
 
-<footer class="about">
-    <h2>Acknowledgement of Country</h2>
-    <div class="footerLink">
-        <div style="margin-right: 20px;">
-            <img class= "flag" src="Images/australian-aboriginal-flag.png" alt="Australian aboriginal Flag">
-        </div>
-        <div style="margin-right: 50px;">
-            <img class= "flag" src="Images/torres-strait-islands-flag.png" alt="Torres Strait islands Flag">
-        </div>
-        <div>
-            <p>We acknowledges the Traditional Owners of Country throughout Australia and acknowledges their continuing connection to land, waters and community. We pay our respects to the people, the cultures and the Elders past and present.</p>
-        </div>
-    </div>
-</footer>
+<?php include 'footer.inc'; ?>
 
 </html>
