@@ -1,14 +1,6 @@
 <?php
-/* -------------------- Central Settings Inclusion -------------------- */
-if (file_exists("settings.php")) {
-    require_once("settings.php");
-}
-
-// Fallback configuration layer if variables are not predefined or named differently
-$database_host     = isset($host) ? $host : "127.0.0.1";
-$database_user     = isset($user) ? $user : "root";
-$database_password = isset($pwd) ? $pwd : (isset($password) ? $password : "");
-$database_name     = isset($sql_db) ? $sql_db : (isset($dbname) ? $dbname : "groupproject");
+// 1. Load your group's central settings file exactly as required
+require_once("settings.php");
 
 /* -------------------- Helper function -------------------- */
 function sanitise_input($data) {
@@ -19,7 +11,7 @@ function sanitise_input($data) {
 }
 
 /* -------------------- Connect to database -------------------- */
-// Uses the dynamically verified configuration elements safely
+// FIXED: Using your group's exact procedural variables ($host, $user, $pwd, $sql_db) 
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
@@ -34,7 +26,7 @@ if (isset($_GET['search'])) {
 
 /* -------------------- Execute Prepared Statements -------------------- */
 if ($search_query !== "") {
-    // Queries data across your real case-sensitive database columns: Title or Description
+    // Queries data across your group's exact database columns: Title or Description
     $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
     $stmt = mysqli_prepare($conn, $search_sql);
     
@@ -63,24 +55,24 @@ if ($search_query !== "") {
 <body>
 
 <header class="header">
-    <a href="index.php" class="logo-link">
-        <img src="images/Logo.png" alt="PixelCraft" class="logo">
-    </a>
+  <a href="index.php" class="logo-link">
+    <img src="images/Logo.png" alt="PixelCraft" class="logo">
+  </a>
 
-    <div class="search-and-nav">
-        <nav class="nav-links">
-            <a href="about.php">About</a>
-            <a href="Jobs.php">Jobs</a>
-            <a href="Apply.php">Apply</a>
-        </nav>
-        
-        <div class="search-bar">
-            <form action="Jobs.php" method="GET" style="display: inline;">
-                <input type="text" name="search" placeholder="Search.." value="<?php echo htmlspecialchars($search_query); ?>">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+  <div class="search-and-nav">
+    <nav class="nav-links">
+      <a href="about.php">About</a>
+      <a href="Jobs.php">Jobs</a>
+      <a href="Apply.php">Apply</a>
+    </nav>
+    
+    <div class="search-bar">
+      <form action="Jobs.php" method="GET" style="display: inline;">
+        <input type="text" name="search" placeholder="Search.." value="<?php echo htmlspecialchars($search_query); ?>">
+        <button type="submit">Search</button>
+      </form>
     </div>
+  </div>
 </header>
 
 <main>
