@@ -1,4 +1,5 @@
 <?php
+// 1. Establish connection to your local XAMPP database
 $host = "127.0.0.1";
 $user = "root";
 $password = "";
@@ -10,19 +11,22 @@ if ($conn->connect_error) {
     die("Database Connection Failed: " . $conn->connect_error);
 }
 
+// 2. Read the search term submitted from the search form
 $search_query = "";
 if (isset($_GET['search'])) {
     $search_query = trim($_GET['search']);
 }
 
+// 3. Select SQL query structure based on whether user typed a search term
 if (!empty($search_query)) {
-    // Corrected to use your real database column names: Title and Description
+    // Searches strictly across your real database columns: Title and Description
     $stmt = $conn->prepare("SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?");
     $search_param = "%" . $search_query . "%";
     $stmt->bind_param("ss", $search_param, $search_param);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
+    // Default fallback to show all records if search bar is empty
     $sql = "SELECT * FROM jobs";
     $result = $conn->query($sql);
 }
@@ -31,82 +35,87 @@ if (!empty($search_query)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PixelCraft Agency - Jobs</title>
+    <title>Jobs | PixelCraft</title>
 </head>
 <body>
 
-<header>
-    <div>PixelCraft</div>
-    <nav>
-        <a href="About.php">about</a>
-        <a href="Jobs.php">jobs</a>
-        <a href="Apply.php">apply</a>
+<header class="header">
+    <a href="index.php" class="logo-link">
+        <img src="images/Logo.png" alt="PixelCraft" class="logo">
+    </a>
+
+    <div class="search-and-nav">
+        <nav class="nav-links">
+            <a href="about.php">About</a>
+            <a href="Jobs.php">Jobs</a>
+            <a href="Apply.php">Apply</a>
+        </nav>
         
-        <form action="Jobs.php" method="GET" style="display: inline;">
-            <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search_query); ?>">
-            <button type="submit">Search</button>
-        </form>
-    </nav>
+        <div class="search-bar">
+            <form action="Jobs.php" method="GET" style="display: inline;">
+                <input type="text" name="search" placeholder="Search.." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 </header>
 
 <main>
-    <div>
-        <h2>Join PixelCraft</h2>
-        <p>A creative agency providing web design, branding, and digital content services. We are recruiting front-end developers and designers to support client-focused web projects.</p>
-    </div>
-
-    <h3>Available Positions</h3>
+    <h1>Available Positions</h1>
 
     <?php
+    // 4. Verify that records exist matching the search/view state
     if ($result && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             ?>
-            <section>
-                <h4>JOB #<?php echo htmlspecialchars($row['job_id'] . ' - ' . $row['Title']); ?></h4>
+            <article>
+                <h2>JOB #<?php echo htmlspecialchars($row['job_id'] . ' - ' . $row['Title']); ?></h2>
                 
-                <p><strong>Description:</strong> <?php echo htmlspecialchars($row['Description']); ?></p>
+                <p><strong>Description:</strong></p>
+                <p><?php echo htmlspecialchars($row['Description']); ?></p>
+                
                 <p><strong>Salary:</strong> $<?php echo number_format($row['Salary']); ?> AUD</p>
 
-                <h5>Key Responsibilities</h5>
+                <h3>Key Responsibilities</h3>
                 <ul>
                     <?php 
-                    // Corrected to capital 'Responsibilities' to match your database
-                    $resp_items = explode("\n", trim($row['Responsibilities']));
-                    foreach ($resp_items as $item) {
-                        if (!empty(trim($item))) {
-                            echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
+                    // Converts multi-line plain text strings inside your database into real bullet listings
+                    $responsibilities = explode("\n", trim($row['Responsibilities']));
+                    foreach ($responsibilities as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
                         }
                     }
                     ?>
                 </ul>
 
-                <h5>Qualifications</h5>
+                <h3>Qualifications</h3>
                 <ul>
                     <?php 
-                    // Corrected to capital 'Qualifications' to match your database
-                    $req_items = explode("\n", trim($row['Qualifications']));
-                    foreach ($req_items as $item) {
-                        if (!empty(trim($item))) {
-                            echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
+                    // Converts multi-line plain text fields into individual HTML list item bullets
+                    $qualifications = explode("\n", trim($row['Qualifications']));
+                    foreach ($qualifications as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
                         }
                     }
                     ?>
                 </ul>
-            </section>
+                
+                <p><a href="Apply.php">Apply for this Position</a></p>
+            </article>
             <hr>
             <?php
         }
     } else {
-        echo "<p>No positions found matching your criteria.</p>";
-        echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p>";
+        // Output gracefully if zero job listings match criteria
+        echo "<p>No listings found matching your search term.</p>";
+        echo "<p><a href='Jobs.php'>View All Jobs</a></p>";
     }
+    
+    // Close worker database interface thread
     $conn->close();
     ?>
-
-    <footer>
-        <h3>Why Work With Us?</h3>
-        <p>PixelCraft offers a collaborative environment, flexible working arrangements, and opportunities to work on diverse client projects.</p>
-    </footer>
 </main>
 
 </body>
