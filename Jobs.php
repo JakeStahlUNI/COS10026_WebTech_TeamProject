@@ -11,7 +11,7 @@ function sanitise_input($data) {
 }
 
 /* -------------------- Connect to database -------------------- */
-// FIXED: Using your group's exact procedural variables ($host, $user, $pwd, $sql_db) 
+// Using your group's exact procedural variables ($host, $user, $pwd, $sql_db) 
 $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
@@ -50,7 +50,9 @@ if ($search_query !== "") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs | PixelCraft</title>
+    <link rel="stylesheet" href="jobs.css">
 </head>
 <body>
 
