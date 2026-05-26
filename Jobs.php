@@ -1,25 +1,61 @@
+<?php
+// Load your group's central credential settings file
+require_once("settings.php");
+
+/* -------------------- Helper function -------------------- */
+function sanitise_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+/* -------------------- Connect to database -------------------- */
+// Using the exact procedural variables ($host, $user, $pwd, $sql_db) from your settings file
+$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+/* -------------------- Collect and sanitise search query -------------------- */
+$search_query = "";
+if (isset($_GET['search'])) {
+    $search_query = sanitise_input($_GET['search']);
+}
+
+/* -------------------- Execute Prepared Statements -------------------- */
+if ($search_query !== "") {
+    // Searches against your case-sensitive columns 'Title' or 'Description'
+    $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
+    $stmt = mysqli_prepare($conn, $search_sql);
+    
+    if (!$stmt) {
+        die("Statement preparation failed: " . mysqli_error($conn));
+    }
+    
+    $search_param = "%" . $search_query . "%";
+    mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+} else {
+    // Fallback if search string is empty or unsubmitted
+    $sql = "SELECT * FROM jobs";
+    $result = mysqli_query($conn, $sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
-
-
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelCraft Careers</title>
-    <link rel="stylesheet" href="styles/jobs.css">
+    <title>Jobs | PixelCraft</title>
 </head>
-
-
 <body>
-
 
 <header class="header">
     <a href="index.php" class="logo-link">
-        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
+        <img src="images/Logo.png" alt="PixelCraft" class="logo">
     </a>
-
 
     <div class="search-and-nav">
         <nav class="nav-links">
@@ -27,101 +63,76 @@
             <a href="Jobs.php">Jobs</a>
             <a href="Apply.php">Apply</a>
         </nav>
+        
         <div class="search-bar">
-            <input type="text" placeholder="Search..">
-            <button type="submit">Search</button>
+            <form action="Jobs.php" method="GET" style="display: inline;">
+                <input type="text" name="search" placeholder="Search.." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button type="submit">Search</button>
+            </form>
         </div>
     </div>
 </header>
 
-
 <main>
-    <section>
-        <h2>Join PixelCraft</h2>
-        <p>
-            A creative agency providing web design, branding, and digital content services.
-            We are recruiting front-end developers and designers to support client-focused web projects.
-        </p>
-    </section>
+    <h1>Available Positions</h1>
 
+    <?php
+    // Loop out retrieved job records dynamically
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+            <article>
+                <h2>JOB #<?php echo htmlspecialchars($row['job_id'] . ' - ' . $row['Title']); ?></h2>
+                
+                <p><strong>Description:</strong></p>
+                <p><?php echo htmlspecialchars($row['Description']); ?></p>
+                
+                <p><strong>Salary:</strong> $<?php echo number_format($row['Salary']); ?> AUD</p>
 
-    <section>
-        <h2>Available Positions</h2>
+                <h3>Key Responsibilities</h3>
+                <ul>
+                    <?php 
+                    // Explodes multi-line database blocks back into item nodes cleanly
+                    $responsibilities = explode("\n", trim($row['Responsibilities']));
+                    foreach ($responsibilities as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
+                        }
+                    }
+                    ?>
+                </ul>
 
+                <h3>Qualifications</h3>
+                <ul>
+                    <?php 
+                    // Explodes multi-line qualification blocks into separate layout points
+                    $qualifications = explode("\n", trim($row['Qualifications']));
+                    foreach ($qualifications as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
+                        }
+                    }
+                    ?>
+                </ul>
+                
+                <p><a href="Apply.php">Apply for this Position</a></p>
+            </article>
+            <hr>
+            <?php
+        }
+    } else {
+        // Safe display output if keyword yields 0 entries
+        echo "<p>No positions found matching your criteria.</p>";
+        echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p>";
+    }
 
-        <section class="job-listing">
-            <h3>FE123 – Front-End Developer</h3>
-            <p><strong>Description:</strong> Develop responsive and interactive web interfaces for client projects.</p>
-            <p><strong>Salary:</strong> $75,000 – $90,000 AUD</p>
-            <p><strong>Reports to:</strong> Lead Developer</p>
-
-
-            <h4>Key Responsibilities</h4>
-            <ul>
-                <li>Build responsive websites using HTML, CSS, and JavaScript</li>
-                <li>Collaborate with designers and back-end developers</li>
-                <li>Optimise applications for performance and usability</li>
-            </ul>
-
-
-            <h4>Requirements</h4>
-            <ol>
-                <li><strong>Essential:</strong> Experience with HTML, CSS, and JavaScript</li>
-                <li><strong>Essential:</strong> Understanding of responsive design</li>
-                <li><strong>Preferable:</strong> Experience with React or similar frameworks</li>
-                <li><strong>Preferable:</strong> Knowledge of version control (Git)</li>
-            </ol>
-        </section>
-
-
-        <section class="job-listing">
-            <h3>UX789 – UI/UX Designer</h3>
-            <p><strong>Description:</strong> Design engaging user experiences and interfaces for web and mobile platforms.</p>
-            <p><strong>Salary:</strong> $70,000 – $85,000 AUD</p>
-            <p><strong>Reports to:</strong> Creative Director</p>
-
-
-            <h4>Key Responsibilities</h4>
-            <ul>
-                <li>Create wireframes, prototypes, and design systems</li>
-                <li>Conduct user research and usability testing</li>
-                <li>Collaborate with developers to implement designs</li>
-            </ul>
-
-
-            <h4>Requirements</h4>
-            <ol>
-                <li><strong>Essential:</strong> Proficiency in Figma or Adobe XD</li>
-                <li><strong>Essential:</strong> Strong portfolio of UI/UX work</li>
-                <li><strong>Preferable:</strong> Knowledge of front-end technologies</li>
-                <li><strong>Preferable:</strong> Experience in agile teams</li>
-            </ol>
-        </section>
-
-
-        <aside>
-            <h3>Why Work With Us?</h3>
-            <p>
-                PixelCraft offers a collaborative environment, flexible working arrangements,
-                and opportunities to work on diverse creative projects across multiple industries.
-            </p>
-        </aside>
-    </section>
+    // Free results and close the connection resource cleanups
+    if (isset($stmt) && $stmt) {
+        mysqli_stmt_close($stmt);
+    }
+    mysqli_close($conn);
+    ?>
 </main>
-
-
-<footer class="footer">
-  <div class="footer-left">
-    <a href="https://105676558cos10026.atlassian.net/jira/software/projects/DEV/boards/1">Jira Project</a>
-    <span>›</span>
-    <a href="https://github.com/JakeStahlUNI/COS10026_WebTech_TeamProject">GitHub Repository</a>
-    <span>›</span>
-    <a href="mailto:info@pixelcraft.com">Contact us at info@pixelcraft.com</a>
-  </div>
-</footer>
-
-
-
 
 </body>
 </html>
