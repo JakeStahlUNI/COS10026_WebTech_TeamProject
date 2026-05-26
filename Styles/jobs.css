@@ -5,15 +5,17 @@
   box-sizing: border-box;
 }
 
+/* ===== BODY ===== */
 body {
   background: linear-gradient(135deg, #4e3ae4 0%, #7b61ff 50%, #f78da7 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch; 
+  align-items: stretch;
   font-family: Arial, sans-serif;
 }
 
+/* ===== HEADER (MATCH INDEX) ===== */
 .header {
   display: flex;          
   align-items: center;  
@@ -56,11 +58,6 @@ body {
   border-radius: 20px;
   cursor: pointer; 
   font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-.search-bar button:hover {
-  background-color: #f0f0f0;
 }
 
 .nav-links a {
@@ -76,20 +73,23 @@ body {
   padding: 8px 16px;
 }
 
+/* ===== MAIN LAYOUT WINDOW ===== */
 main {
   width: 95%;
-  max-width: 900px;
+  max-width: 850px;
   margin: 40px auto;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 35px;
 }
 
+/* ===== INTRO SECTION ===== */
 .intro-section {
   background: white;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: left; /* Explicitly forces left alignment */
 }
 
 .intro-section h1 {
@@ -103,84 +103,102 @@ main {
   line-height: 1.6;
 }
 
+/* ===== JOB LISTINGS CONTAINER ===== */
 .job-listing {
   background: white;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Overrides the clunky center alignment completely */
 }
 
+/* Main Job Title Heading Card */
 .job-listing h2 {
   background-color: #ebf5ff;
   color: #1e40af;
   padding: 16px 20px;
-  margin-bottom: 30px;
-  font-size: 1.4rem;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
   text-transform: uppercase;
   border-radius: 8px;
   border-left: 6px solid #2575fc;
   letter-spacing: 0.5px;
 }
 
+/* Section titles: DESCRIPTION, SALARY, RESPONSIBILITIES, QUALIFICATIONS */
 .job-section-title {
   display: block;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.95rem;
-  letter-spacing: 0.8px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
   margin-top: 25px;
-  margin-bottom: 10px;
-  color: #1e40af; 
-  border-bottom: 2px solid #f1f5f9;
-  padding-bottom: 6px;
+  margin-bottom: 8px;
+  color: #475569; /* Sleek, crisp corporate slate color */
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
 }
 
 .job-description {
   color: #334155;
   line-height: 1.6;
   font-size: 1.05rem;
-  padding-left: 5px;
 }
 
 .job-salary {
-  color: #059669; 
+  color: #059669; /* Crisp emerald green text for clear compensation visibility */
   font-weight: bold;
   font-size: 1.2rem;
-  padding-left: 5px;
 }
 
+/* Beautiful, naturally spaced list bullet formats */
 .job-listing ul {
-  list-style-position: outside;
+  list-style-type: disc;
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-top: 5px;
 }
 
 .job-listing li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #334155;
-  line-height: 1.6;
-  font-size: 1.05rem;
+  line-height: 1.5;
+  font-size: 1.02rem;
+}
+
+/* Clear Call-To-Action Apply Button Block */
+.apply-container {
+  margin-top: 35px;
+  border-top: 2px dashed #e2e8f0;
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* Places button nicely on the bottom right corner */
 }
 
 .apply-btn {
   display: inline-block;
-  margin-top: 25px;
-  padding: 14px 28px;
+  padding: 12px 28px;
   background-color: #2575fc;
   color: white;
   text-decoration: none;
   font-weight: bold;
   border-radius: 6px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
   text-transform: uppercase;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(37, 117, 252, 0.2);
 }
 
 .apply-btn:hover {
   background-color: #1a5dd4;
+  transform: translateY(-1px);
 }
 
+.apply-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== FOOTER (MATCH INDEX) ===== */
 .footer {
   background: white;
   color: black;
@@ -189,7 +207,7 @@ main {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: auto; 
+  margin-top: auto;
 }
 
 .footer-left {
@@ -202,13 +220,4 @@ main {
 .footer-left a {
   color: black;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.footer-left a:hover {
-  opacity: 0.7;
-}
-
-.footer-left span {
-  opacity: 0.6;
 }

@@ -75,7 +75,7 @@ if ($search_query !== "") {
 <main>
     <section class="intro-section">
         <h1>Available Positions</h1>
-        <p>Thank you for your interest in joining PixelCraft. Explore our active career options down below and find your next breakthrough role.</p>
+        <p>Explore active career opportunities at PixelCraft. Review requirements and submit an application using the details below.</p>
     </section>
 
     <?php
@@ -115,7 +115,9 @@ if ($search_query !== "") {
                     ?>
                 </ul>
                 
-                <a href="Apply.php?jobref=<?php echo urlencode($row['job_id']); ?>" class="apply-btn">Apply for this Position</a>
+                <div class="apply-container">
+                    <a href="Apply.php?jobref=<?php echo urlencode($row['job_id']); ?>" class="apply-btn">Apply for this Position</a>
+                </div>
             </article>
             <?php
         }
