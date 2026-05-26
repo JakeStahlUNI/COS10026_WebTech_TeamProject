@@ -73,74 +73,62 @@ if ($search_query !== "") {
 </header>
 
 <main>
-    <div class="content-container">
-        <section class="intro-section">
-            <h1>Available Positions</h1>
-            <p>Thank you for your interest in joining PixelCraft. Explore our active career options down below and find your next breakthrough role.</p>
-        </section>
+    <section class="intro-section">
+        <h1>Available Positions</h1>
+        <p>Thank you for your interest in joining PixelCraft. Explore our active career options down below and find your next breakthrough role.</p>
+    </section>
 
-        <?php
-        if ($result && mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                <article class="job-listing">
-                    <h2>JOB #<?php echo htmlspecialchars($row['job_id'] . ' - ' . $row['Title']); ?></h2>
-                    
-                    <p class="job-section-title">Description:</p>
-                    <p class="job-description"><?php echo htmlspecialchars($row['Description']); ?></p>
-                    
-                    <p class="job-section-title">Salary:</p>
-                    <p class="job-salary">$<?php echo number_format($row['Salary']); ?> AUD</p>
+    <?php
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+            <article class="job-listing">
+                <h2>JOB #<?php echo htmlspecialchars($row['job_id'] . ' - ' . $row['Title']); ?></h2>
+                
+                <span class="job-section-title">Description</span>
+                <p class="job-description"><?php echo htmlspecialchars($row['Description']); ?></p>
+                
+                <span class="job-section-title">Salary</span>
+                <p class="job-salary">$<?php echo number_format($row['Salary']); ?> AUD</p>
 
-                    <p class="job-section-title">Key Responsibilities:</p>
-                    <ul>
-                        <?php 
-                        $responsibilities = explode("\n", trim($row['Responsibilities']));
-                        foreach ($responsibilities as $line) {
-                            if (!empty(trim($line))) {
-                                echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
-                            }
+                <span class="job-section-title">Key Responsibilities</span>
+                <ul>
+                    <?php 
+                    $responsibilities = explode("\n", trim($row['Responsibilities']));
+                    foreach ($responsibilities as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
                         }
-                        ?>
-                    </ul>
+                    }
+                    ?>
+                </ul>
 
-                    <p class="job-section-title">Qualifications:</p>
-                    <ul>
-                        <?php 
-                        $qualifications = explode("\n", trim($row['Qualifications']));
-                        foreach ($qualifications as $line) {
-                            if (!empty(trim($line))) {
-                                echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
-                            }
+                <span class="job-section-title">Qualifications</span>
+                <ul>
+                    <?php 
+                    $qualifications = explode("\n", trim($row['Qualifications']));
+                    foreach ($qualifications as $line) {
+                        if (!empty(trim($line))) {
+                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
                         }
-                        ?>
-                    </ul>
-                    
-                    <a href="Apply.php?jobref=<?php echo urlencode($row['job_id']); ?>" class="apply-btn">Apply for this Position</a>
-                </article>
-                <?php
-            }
-        } else {
-            echo "<div class='job-listing'><p>No positions found matching your criteria.</p>";
-            echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p></div>";
+                    }
+                    ?>
+                </ul>
+                
+                <a href="Apply.php?jobref=<?php echo urlencode($row['job_id']); ?>" class="apply-btn">Apply for this Position</a>
+            </article>
+            <?php
         }
+    } else {
+        echo "<div class='job-listing'><p>No positions found matching your criteria.</p>";
+        echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p></div>";
+    }
 
-        if (isset($stmt) && $search_query !== "") {
-            mysqli_stmt_close($stmt);
-        }
-        mysqli_close($conn);
-        ?>
-    </div>
-
-    <aside>
-        <h3>Application Tips</h3>
-        <ul>
-            <li>Check your job reference number carefully before submitting.</li>
-            <li>Use a valid email address so our recruitment team can contact you.</li>
-            <li>Complete all required fields before submission.</li>
-            <li>Review your answers before pressing Submit.</li>
-        </ul>
-    </aside>
+    if (isset($stmt) && $search_query !== "") {
+        mysqli_stmt_close($stmt);
+    }
+    mysqli_close($conn);
+    ?>
 </main>
 
 <footer class="footer">
