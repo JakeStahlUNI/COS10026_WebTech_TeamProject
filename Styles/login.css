@@ -69,7 +69,15 @@ body
 
 .login-container input[type="submit"]:hover
 {
-    background-color: #1a5ed9;
+    width: 100%;
+    padding: 12px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: block;
 }
 .login-container
 {
@@ -113,4 +121,22 @@ body
 .login-container a:hover
 {
     background-color: #1a5ed9;
+}
+.home-button
+{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.home-button:hover
+{
+    background-color: #555;
 }
