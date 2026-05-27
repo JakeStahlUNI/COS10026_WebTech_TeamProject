@@ -11,27 +11,11 @@
   <link rel="stylesheet" href="styles/apply.css" />
 </head>
 
-<body>
-  <header class="header">
-    <div class="header-container">
-      <a href="index.php">
-        <img src="images/Logo.png" alt="PixelCraft Logo" class="logo"/>
-      </a>
 
-      <div class="search-and-nav">
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="about.php">About</a>
-          <a href="jobs.php">Jobs</a>
-          <a href="apply.php" aria-current="page">Apply</a>
-        </nav>
-        <div class="search-bar">
-          <label for="site-search" class="sr-only">Search the site</label>
-          <input type="text" id="site-search" name="site-search" placeholder="Search.." maxlength="40">
-          <button type="button">Search</button>
-        </div>
-      </div>
-    </div>
-  </header>
+
+<body>
+  <?php include 'header.inc'; ?>
+  
 
   <main class="container">
     <section class="page-banner">
@@ -308,22 +292,7 @@
     </aside>
   </main>
 
-  <footer>
-    <div class="container">
-      <section aria-labelledby="acknowledgement-heading">
-        <h2 id="acknowledgement-heading" class="sr-only">Acknowledgement of Country</h2>
-        <p style="font-style: italic;">
-          PixelCraft acknowledges the Traditional Owners of the land on which we work and learn,
-          and we pay our respects to Elders past and present.
-        </p>
-      </section>
 
-      <p>&copy; 2026 PixelCraft. All rights reserved.</p>
-      <p>
-        <a href="mailto:info@pixelcraft.com">info@pixelcraft.com</a>
-      </p>
-    </div>
-  </footer>
 
   <script>
     const dobInput = document.getElementById("dob");
@@ -407,5 +376,8 @@
       }
     });
   </script>
+
 </body>
+<?php include 'footer.inc'; ?>
+
 </html>
