@@ -11,6 +11,9 @@
 
 <h1>Welcome to PixelCraft</h1>
 <p>
+  Crafting modern digital experiences that bring ideas to life.
+</p>
+<p>
 A creative agency providing web design, branding, and digital content services, recruiting front‑end developers 
 and designers to support client‑focused web projects. 
 Down below you can see what we offer and all the information about this website.
