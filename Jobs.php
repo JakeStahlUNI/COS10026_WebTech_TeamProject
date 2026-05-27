@@ -1,8 +1,4 @@
 <?php
-/**
- * PixelCraft - Jobs Board (Jobs.php)
- * COS10026 - Web Technology Project
- */
 
 // 1. Fetch global server setup variables
 require_once("settings.php");
@@ -45,7 +41,7 @@ if (isset($_GET['search'])) {
 /* -------------------- SQL Queries -------------------- */
 
 if ($search_query !== "") {
-    // Search Mode: Query using placeholders (?) to prevent SQL injection
+    // Search Mode: Query using placeholders (?) to prevent SQL injection (security)
     $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
     $stmt = mysqli_prepare($conn, $search_sql);
     
@@ -103,7 +99,7 @@ if ($search_query !== "") {
     </section>
 
     <?php
-    // If jobs are found, process them row-by-row into an associative array
+    // If jobs are found, process them row-by-row into an array
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             ?>
