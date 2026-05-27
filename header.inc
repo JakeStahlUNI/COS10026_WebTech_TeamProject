@@ -11,6 +11,7 @@
       <a href="About.php">About</a>
       <a href="Jobs.php">Jobs</a>
       <a href="Apply.php">Apply</a>
+      <a href="login.php">Login</a>
     </nav>
     <div class="search-bar">
     <form>
