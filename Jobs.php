@@ -42,7 +42,7 @@ if (isset($_GET['search'])) {
     $search_query = sanitise_input($_GET['search']);
 }
 
-/* -------------------- SQL Queries (Security via Prepared Statements) -------------------- */
+/* -------------------- SQL Queries -------------------- */
 
 if ($search_query !== "") {
     // Search Mode: Query using placeholders (?) to prevent SQL injection
@@ -53,7 +53,7 @@ if ($search_query !== "") {
         die("Statement preparation failed: " . mysqli_error($conn));
     }
     
-    // Attach wildcards (%) so search queries can match partial text
+    // Attach wildcards (%) so can search part of a job and would still return listing
     $search_param = "%" . $search_query . "%";
     mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
     mysqli_stmt_execute($stmt);
@@ -137,7 +137,7 @@ if ($search_query !== "") {
         echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p></div>";
     }
 
-    /* -------------------- Housekeeping / Closing Links -------------------- */
+    /* -------------------- Closing Links -------------------- */
     if (isset($stmt) && $search_query !== "") {
         mysqli_stmt_close($stmt);
     }
