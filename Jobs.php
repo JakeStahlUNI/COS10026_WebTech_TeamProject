@@ -1,8 +1,15 @@
 <?php
-// 1. Load your group's central settings file exactly as required
+/**
+ * PixelCraft - Jobs Board (Jobs.php)
+ * COS10026 - Web Technology Project
+ */
+
+// 1. Fetch global server setup variables
 require_once("settings.php");
 
-/* -------------------- Helper function -------------------- */
+/* -------------------- Helper Functions -------------------- */
+
+// Removes trailing spaces, slashes, and turns HTML tags into harmless text
 function sanitise_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -10,21 +17,35 @@ function sanitise_input($data) {
     return $data;
 }
 
-/* -------------------- Connect to database -------------------- */
-$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+// Breaks up text blocks by line breaks (\n) and echoes them as HTML list items
+function print_list_items($text_data) {
+    $lines = explode("\n", trim($text_data));
+    foreach ($lines as $line) {
+        if (!empty(trim($line))) {
+            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
+        }
+    }
+}
 
+/* -------------------- Database Connection -------------------- */
+
+// Start connection to MySQL database; stop page execution if it fails
+$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-/* -------------------- Collect and sanitise search query -------------------- */
-$search_query = "";
+/* -------------------- Process Search Form -------------------- */
+
+$search_query = ""; 
 if (isset($_GET['search'])) {
     $search_query = sanitise_input($_GET['search']);
 }
 
-/* -------------------- Execute Prepared Statements -------------------- */
+/* -------------------- SQL Queries (Security via Prepared Statements) -------------------- */
+
 if ($search_query !== "") {
+    // Search Mode: Query using placeholders (?) to prevent SQL injection
     $search_sql = "SELECT * FROM jobs WHERE Title LIKE ? OR Description LIKE ?";
     $stmt = mysqli_prepare($conn, $search_sql);
     
@@ -32,11 +53,14 @@ if ($search_query !== "") {
         die("Statement preparation failed: " . mysqli_error($conn));
     }
     
+    // Attach wildcards (%) so search queries can match partial text
     $search_param = "%" . $search_query . "%";
     mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+
 } else {
+    // Normal Mode: Fetch all job rows directly
     $sql = "SELECT * FROM jobs";
     $result = mysqli_query($conn, $sql);
 }
@@ -75,10 +99,11 @@ if ($search_query !== "") {
 <main>
     <section class="intro-section">
         <h1>Available Positions</h1>
-        <p>Explore active career opportunities at PixelCraft. Review requirements and submit an application using the details below.</p>
+        <p>Explore active career opportunities at PixelCraft.</p>
     </section>
 
     <?php
+    // If jobs are found, process them row-by-row into an associative array
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             ?>
@@ -93,26 +118,12 @@ if ($search_query !== "") {
 
                 <span class="job-section-title">Key Responsibilities</span>
                 <ul>
-                    <?php 
-                    $responsibilities = explode("\n", trim($row['Responsibilities']));
-                    foreach ($responsibilities as $line) {
-                        if (!empty(trim($line))) {
-                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
-                        }
-                    }
-                    ?>
+                    <?php print_list_items($row['Responsibilities']); ?>
                 </ul>
 
                 <span class="job-section-title">Qualifications</span>
                 <ul>
-                    <?php 
-                    $qualifications = explode("\n", trim($row['Qualifications']));
-                    foreach ($qualifications as $line) {
-                        if (!empty(trim($line))) {
-                            echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
-                        }
-                    }
-                    ?>
+                    <?php print_list_items($row['Qualifications']); ?>
                 </ul>
                 
                 <div class="apply-container">
@@ -126,6 +137,7 @@ if ($search_query !== "") {
         echo "<p><a href='Jobs.php'>Clear Search Criteria</a></p></div>";
     }
 
+    /* -------------------- Housekeeping / Closing Links -------------------- */
     if (isset($stmt) && $search_query !== "") {
         mysqli_stmt_close($stmt);
     }
@@ -135,10 +147,8 @@ if ($search_query !== "") {
 
 <footer class="footer">
     <div class="footer-left">
-        <a href="index.php">Home</a>
-        <span>•</span>
-        <a href="about.php">About Us</a>
-        <span>•</span>
+        <a href="index.php">Home</a><span>•</span>
+        <a href="about.php">About Us</a><span>•</span>
         <a href="Jobs.php">Careers</a>
     </div>
     <div class="footer-right">
