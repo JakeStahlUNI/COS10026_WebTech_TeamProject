@@ -71,26 +71,9 @@ if ($search_query !== "") {
 </head>
 <body>
 
-<header class="header">
-  <a href="index.php" class="logo-link">
-    <img src="images/Logo.png" alt="PixelCraft" class="logo">
-  </a>
+<?php include 'header.inc'; ?>
 
-  <div class="search-and-nav">
-    <nav class="nav-links">
-      <a href="about.php">About</a>
-      <a href="Jobs.php" class="active">Jobs</a>
-      <a href="Apply.php">Apply</a>
-    </nav>
-    
-    <div class="search-bar">
-      <form action="Jobs.php" method="GET">
-        <input type="text" name="search" placeholder="Search.." value="<?php echo htmlspecialchars($search_query); ?>">
-        <button type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</header>
+
 
 <main>
     <section class="intro-section">
@@ -141,16 +124,7 @@ if ($search_query !== "") {
     ?>
 </main>
 
-<footer class="footer">
-    <div class="footer-left">
-        <a href="index.php">Home</a><span>•</span>
-        <a href="about.php">About Us</a><span>•</span>
-        <a href="Jobs.php">Careers</a>
-    </div>
-    <div class="footer-right">
-        <p>&copy; <?php echo date("Y"); ?> PixelCraft Agency. All rights reserved.</p>
-    </div>
-</footer>
+<?php include 'footer.inc'; ?>
 
 </body>
 </html>
