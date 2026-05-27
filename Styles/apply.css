@@ -21,7 +21,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-
+/*
 .header {
   background: linear-gradient(135deg, #fefefe, #f8f8f9);
   padding: 1rem 0;
@@ -112,7 +112,64 @@ body {
   transform: translateY(-1px);
 }
 
+*/
 
+.header {
+  display: flex;          
+  align-items: center;  
+  justify-content: space-between; 
+  padding: 10px 20px;
+  background-color: white;
+  width: 100%;
+}
+
+.logo {
+  width: 250px;
+  height: auto;
+}
+
+.search-and-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-bar input {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.search-bar button { 
+  padding: 8px 16px; 
+  background-color: #ffffff; 
+  color: black; 
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.nav-links a.active {
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 8px 16px;
+}
 /* Main */
 main {
   display: grid;

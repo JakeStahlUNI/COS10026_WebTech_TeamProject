@@ -6,13 +6,17 @@
 
   <div class="search-and-nav">
     <nav class="nav-links">
-      <a href="about.php">About</a>
+    
+      <a href="index.php">Home</a>
+      <a href="About.php">About</a>
       <a href="Jobs.php">Jobs</a>
       <a href="Apply.php">Apply</a>
     </nav>
     <div class="search-bar">
+    <form>
       <input type="text" placeholder="Search..">
       <button type="submit">Search</button>
+    </form>
     </div>
   </div>
 </header>

@@ -5,23 +5,7 @@
   <link rel="stylesheet" href="styles/Index.css" />
 </head>
 
-<header class="header">
-  <a href="index.php" class="logo-link">
-    <img src="images/Logo.png" alt="PixelCraft" class="logo" />
-  </a>
-
-  <div class="search-and-nav">
-    <nav class="nav-links">
-      <a href="about.php">About</a>
-      <a href="Jobs.php">Jobs</a>
-      <a href="Apply.php">Apply</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Search..">
-      <button type="submit">Search</button>
-    </div>
-  </div>
-</header>
+<?php include 'header.inc'; ?>
 
 <div class="content">
 
@@ -52,13 +36,5 @@ Down below you can see what we offer and all the information about this website.
   </tr>
 </table>
 
-<footer class="footer">
-  <div class="footer-left">
-    <a href="https://105676558cos10026.atlassian.net/jira/software/projects/DEV/boards/1">Jira Project</a>
-    <span>›</span>
-    <a href="https://github.com/JakeStahlUNI/COS10026_WebTech_TeamProject">GitHub Repository</a>
-    <span>›</span>
-    <a href="mailto:info@pixelcraft.com">Contact us at info@pixelcraft.com</a>
-  </div>
-</footer>
+<?php include 'footer.inc'; ?>
 

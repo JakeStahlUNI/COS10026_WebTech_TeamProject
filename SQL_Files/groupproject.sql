@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2026 at 03:32 AM
+-- Generation Time: May 27, 2026 at 03:06 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,27 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contributions`
+--
+
+CREATE TABLE `contributions` (
+  `id` int(11) NOT NULL,
+  `member_name` varchar(100) NOT NULL,
+  `contribution_project1` text NOT NULL,
+  `contribution_project2` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `eoi`
 --
 
-CREATE TABLE eoi (
-  EOInumber INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  jobref VARCHAR(5) NOT NULL,
-  firstname VARCHAR(20) NOT NULL,
-  lastname VARCHAR(20) NOT NULL,
-  dob VARCHAR(10) NOT NULL,
-  gender VARCHAR(20) NOT NULL,
-  streetaddress VARCHAR(40) NOT NULL,
-  suburb VARCHAR(40) NOT NULL,
-  state VARCHAR(3) NOT NULL,
-  postcode VARCHAR(4) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  phone VARCHAR(12) NOT NULL,
-  skills TEXT DEFAULT NULL,
-  otherskills VARCHAR(300) DEFAULT NULL,
-  declaration VARCHAR(10) NOT NULL,
-  status ENUM('New', 'Current', 'Final') NOT NULL DEFAULT 'New'
-);
+CREATE TABLE `eoi` (
+  `EOInumber` int(11) NOT NULL,
+  `jobref` varchar(5) NOT NULL,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `streetaddress` varchar(40) NOT NULL,
+  `suburb` varchar(40) NOT NULL,
+  `state` varchar(3) NOT NULL,
+  `postcode` varchar(4) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(12) NOT NULL,
+  `skills` text DEFAULT NULL,
+  `otherskills` varchar(300) DEFAULT NULL,
+  `declaration` varchar(10) NOT NULL,
+  `status` enum('New','Current','Final') NOT NULL DEFAULT 'New'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -72,9 +86,33 @@ CREATE TABLE `manager` (
   `Password` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `managerlogin`
+--
+
+CREATE TABLE `managerlogin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `contributions`
+--
+ALTER TABLE `contributions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `eoi`
+--
+ALTER TABLE `eoi`
+  ADD PRIMARY KEY (`EOInumber`);
 
 --
 -- Indexes for table `jobs`
@@ -89,8 +127,20 @@ ALTER TABLE `manager`
   ADD PRIMARY KEY (`User_ID`);
 
 --
+-- Indexes for table `managerlogin`
+--
+ALTER TABLE `managerlogin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `eoi`
+--
+ALTER TABLE `eoi`
+  MODIFY `EOInumber` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -103,6 +153,12 @@ ALTER TABLE `jobs`
 --
 ALTER TABLE `manager`
   MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `managerlogin`
+--
+ALTER TABLE `managerlogin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
