@@ -33,28 +33,24 @@
     <dl>
         
         <dt>Member: Jake Stahl (Team leader & Developer)</dt>
-        <dd>Contribution: Develop index Page and style.</dd>
         <dd>Quote(English) : It always seems impossible until its done</dd>
         <dd>Russian Translation : Пока это не сделано, это всегда кажется невозможным.</dd>
     </dl>
     <dl>
         
         <dt>Member: Ethan Hoang (Developer)</dt>
-        <dd>Contribution: Develop Job Page and style.</dd>
         <dd>Quote(English) :  You miss 100% of the shots you don't take</dd>
         <dd>Vietnamese Translation :Bạn sẽ bỏ lỡ 100% những cú sút nếu bạn không thực hiện.</dd>
     </dl>
     <dl>
         
         <dt>Member: Lingyu Fu (Developer)</dt>
-        <dd>Contribution: Develop Apply Page and style.</dd>
-        <dd>Quote(Chinese) : 知人者智，自知者明</dd>
+        <dd></dd>Quote(Chinese) : 知人者智，自知者明</dd>
         <dd>English Translation :Those who know others are wise, and those who know themselves are clear.</dd>
     </dl>
     <dl>
         
         <dt>Member: Jinhang Wu (Developer)</dt>
-        <dd>Contribution: Develop About Page and style.</dd>
         <dd>Quote(Chinese) :有志者，事竟成</dd>
         <dd>English Translation :Where there's a will, there's a way.</dd>
     </dl>
@@ -70,6 +66,52 @@
         </figcaption>
     </figure>
 </div>
+
+<div class="about">
+    <h2>Contributions Table</h2>
+    <hr>
+
+<?php
+require_once "settings.php";
+$dbconn = mysqli_connect($host,$user,$pwd,$sql_db);
+
+
+
+if (!$dbconn) {
+    die('connect fail' . mysqli_connect_error());
+}
+
+    $sql = "SELECT * FROM contributions";
+    $result = mysqli_query($dbconn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    echo "<table class='aboutTable'>";
+    echo "<caption>Team Contributions</caption>";  
+    echo "<thead>";
+    echo "<tr><td style='pointer-events: none;'>Member</td><td style='pointer-events: none;'>Contribution of project 1</td><td style='pointer-events: none;'>Contribution of project 2</td></tr>";
+    echo "</thead>";
+    echo "<tbody>";
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['member_name'] . "</td>";
+    echo "<td>" . $row['contribution_project1'] . "</td>";
+    echo "<td>" . $row['contribution_project2'] . "</td>";
+    echo "</tr>";
+}
+    echo "</tbody>";
+    echo "</table>";
+} else {
+    echo "No matching contributions table.";
+}
+
+mysqli_close($dbconn);
+?>
+</div>
+
+
+
+
+
 
 <div class="about">
     <h2>Group Fun Facts</h2>
@@ -113,7 +155,7 @@
     </table>
 </div>
 
-<footer class="about">
+<div class="about">
     <h2>Acknowledgement of Country</h2>
     <div class="footerLink">
         <div style="margin-right: 20px;">
@@ -127,7 +169,7 @@
             
         </div>
     </div>
-</footer>
+</div>
 
 
 <?php include 'footer.inc'; ?>
