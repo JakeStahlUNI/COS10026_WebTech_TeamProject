@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic page metadata -->
   <meta charset="utf-8" />
   <meta name="description" content="Apply page for a job recruitment website" />
   <meta name="keywords" content="job application, careers, HTML5, CSS3, accessibility" />
   <meta name="author" content="Lingyu Fu" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Browser tab title -->
   <title>Apply | PixelCraft</title>
 
+  <!-- External stylesheets -->
   <link rel="stylesheet" href="styles/apply.css" />
-  <link rel="stylesheet" href="styles/Main.css">
+  <link rel="stylesheet" href="styles/Main.css" />
 </head>
 
-
-
 <body>
+  <!-- Shared header -->
   <?php include 'header.inc'; ?>
-  
 
   <main class="container">
+    <!-- Page banner -->
     <section class="page-banner">
       <h2>Job Application Form</h2>
       <p>
@@ -27,6 +30,7 @@
       </p>
     </section>
 
+    <!-- Main form section -->
     <section aria-labelledby="application-form-heading" class="form-section">
       <h3 id="application-form-heading">Apply for Your Chosen Role</h3>
 
@@ -34,6 +38,7 @@
         Fields marked with <strong>*</strong> are required.
       </p>
 
+      <!-- Success / error messages returned from process_eoi.php -->
       <?php
         if (isset($_GET['error'])) {
           echo "<div class='error-box'><p><strong>Submission failed.</strong> Please check your input and try again.</p></div>";
@@ -45,7 +50,10 @@
         }
       ?>
 
+      <!-- Project 2 requires server-side validation -->
       <form method="post" action="process_eoi.php" novalidate>
+
+        <!-- Position Information -->
         <fieldset>
           <legend>Position Information</legend>
           <div class="form-grid">
@@ -63,6 +71,7 @@
           </div>
         </fieldset>
 
+        <!-- Personal Details -->
         <fieldset>
           <legend>Personal Details</legend>
           <div class="form-grid">
@@ -132,6 +141,7 @@
           </div>
         </fieldset>
 
+        <!-- Address and Contact Details -->
         <fieldset>
           <legend>Address and Contact Details</legend>
           <div class="form-grid">
@@ -212,6 +222,7 @@
           </div>
         </fieldset>
 
+        <!-- Skills and Experience -->
         <fieldset>
           <legend>Skills and Experience</legend>
 
@@ -260,6 +271,7 @@
           </div>
         </fieldset>
 
+        <!-- Applicant Declaration -->
         <fieldset>
           <legend>Applicant Declaration</legend>
           <div class="form-group">
@@ -275,6 +287,7 @@
           </div>
         </fieldset>
 
+        <!-- Form action buttons -->
         <div class="button-row">
           <input type="submit" value="Submit Application" class="btn-primary" />
           <input type="reset" value="Reset Form" class="btn-secondary" />
@@ -282,6 +295,7 @@
       </form>
     </section>
 
+    <!-- Support panel -->
     <aside class="support-panel">
       <h3>Application Tips</h3>
       <ul>
@@ -293,12 +307,15 @@
     </aside>
   </main>
 
-
+  <!-- Shared footer -->
+  <?php include 'footer.inc'; ?>
 
   <script>
+    // Get DOB input and error display area
     const dobInput = document.getElementById("dob");
     const dobError = document.getElementById("dob-error");
 
+    // Validate DOB format and prevent future dates
     function validateDOB(value) {
       const dobPattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
@@ -321,9 +338,9 @@
 
       const inputDate = new Date(year, month, day);
       const today = new Date();
-
       today.setHours(0, 0, 0, 0);
 
+      // Ensure the date actually exists
       if (
         inputDate.getFullYear() !== year ||
         inputDate.getMonth() !== month ||
@@ -332,6 +349,7 @@
         return "Please enter a valid calendar date.";
       }
 
+      // DOB cannot be later than today
       if (inputDate > today) {
         return "Date of birth cannot be later than today.";
       }
@@ -339,6 +357,7 @@
       return "";
     }
 
+    // Auto-insert "/" while typing
     dobInput.addEventListener("input", function (e) {
       let value = e.target.value.replace(/\D/g, "");
 
@@ -365,6 +384,7 @@
       }
     });
 
+    // Validate again on blur
     dobInput.addEventListener("blur", function () {
       const errorMessage = validateDOB(dobInput.value);
 
@@ -377,8 +397,5 @@
       }
     });
   </script>
-
 </body>
-<?php include 'footer.inc'; ?>
-
 </html>
