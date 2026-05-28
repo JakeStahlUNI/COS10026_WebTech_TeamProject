@@ -9,6 +9,7 @@
   <title>Apply | PixelCraft</title>
 
   <link rel="stylesheet" href="styles/apply.css" />
+  <link rel="stylesheet" href="styles/Main.css">
 </head>
 
 

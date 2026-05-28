@@ -1,90 +1,43 @@
-body 
-{
+
+body {
   background: radial-gradient(circle at top left, #6a11cb, #2575fc, #ff9a9e);
 }
 
-.header {
-  display: flex;          
-  align-items: center;  
-  justify-content: space-between; 
-  padding: 10px 20px;
-  background-color: white;
-}
-
-.logo {
-  width: 250px;
-  height: auto;
-}
-
-.search-and-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;       
-  font-family: Arial, sans-serif;       
-}
-
-.search-bar button 
-{ 
-  padding: 8px 16px; 
-  background-color: #2575fc; 
-  color: black; 
-  border: 2px solid white;
-  border-radius: 6px;
-  cursor: pointer; 
-  font-family: Arial, sans-serif;}
-
-.search-bar input {
-  padding: 5px;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  color: black;
-  padding: 10px;
-  font-weight: bold;
-}
-
+/* ===== MAIN CONTENT ===== */
 .content {
-  max-width: 900px;    
-  margin: 40px auto;     
+  max-width: 900px;
+  margin: 40px auto;
   padding: 30px;
   background-color: white;
-  border-radius: 12px;       
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .content h1 {
   font-size: 36px;
-  font-family: Arial, sans-serif;
   margin-bottom: 15px;
 }
 
-.content p 
-{
+.content p {
   font-size: 18px;
-  font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
   margin-bottom: 25px;
 }
 
-.content img 
-{
+.content img {
   width: 200px;
   height: auto;
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
-.content img:hover 
-{
+.content img:hover {
   transform: scale(1.05);
 }
 
+/* ===== TABLE ===== */
 table {
   width: 80%;
   max-width: 800px;
@@ -93,130 +46,30 @@ table {
   background-color: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-  box-shadow: 
-    0 0 0 5px white, 
+  box-shadow:
+    0 0 0 5px white,
     0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Header row */
 th {
-  background-color:#2575fc;
+  background-color: #2575fc;
   color: white;
   font-size: 22px;
   padding: 15px;
   text-transform: uppercase;
 }
 
-/* Table cells */
 td {
   padding: 15px;
   border-bottom: 1px solid #eee;
 }
 
-/* Left column (service names) */
 td:first-child {
   font-weight: bold;
   width: 30%;
 }
 
-/* Hover effect for rows */
 tr:hover td {
   background-color: #f5f5f5;
-}
-
-.footer {
-  background: white;
-  color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: Arial, sans-serif;
-}
-
-/* Left side links */
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.footer-left a {
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.footer-left a:hover {
-  opacity: 0.7;
-}
-
-.footer-left span {
-  opacity: 0.6;
-}
-
-.about {
-  max-width: 1200px;
-  margin: 40px auto;     
-  padding: 30px;
-  background-color: white;
-  border-radius: 12px;       
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
-  font-family: Arial, sans-serif;
-}
-
-.about h2 {
-  display: flex;
-}
-
-.about hr {
-  color: black;
-}
-
-.about dl{
-  margin-bottom: 0.5rem;
-}
-
-
-.about dt{
-  color: #333;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.about dd{
-  margin-bottom: 8px;
-}
-
-.aboutTable{
-  width: 100% !important;
-  max-width: none !important;
-}
-
-.about thead{
-  background-color: #2575fc;
-
-}
-
-.about a{
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-.footerLink{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-}
-
-.flag{
-  width: 100px;
-  justify-content: space-between;
-  align-items: center;
 }

@@ -71,6 +71,7 @@ if ($search_query !== "") {
     <meta name="author" content="PixelCraft Team">
     <title>Jobs | PixelCraft</title>
     <link rel="stylesheet" href="styles/jobs.css">
+    <link rel="stylesheet" href="styles/Main.css">
 </head>
 <body>
 

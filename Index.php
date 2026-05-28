@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" href="styles/Index.css" />
+  <link rel="stylesheet" href="styles/Main.css">
 </head>
 
 <?php include 'header.inc'; ?>
