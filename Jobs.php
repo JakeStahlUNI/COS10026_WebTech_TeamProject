@@ -127,9 +127,6 @@ if ($search_query !== "") {
     mysqli_close($conn);
     ?>
 </main>
-
-
-
 </body>
 <?php include 'footer.inc'; ?>
 </html>

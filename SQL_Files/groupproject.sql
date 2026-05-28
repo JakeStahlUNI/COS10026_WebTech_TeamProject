@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2026 at 03:06 AM
+-- Generation Time: May 28, 2026 at 04:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -28,11 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contributions` (
-  `id` int(11) NOT NULL,
+  `contribution_list_id` int(11) NOT NULL,
   `member_name` varchar(100) NOT NULL,
   `contribution_project1` text NOT NULL,
   `contribution_project2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contributions`
+--
+
+INSERT INTO `contributions` (`contribution_list_id`, `member_name`, `contribution_project1`, `contribution_project2`) VALUES
+(1, 'Jake Stahl', 'Developed the index page layout and styling.', 'Built manage.php: list all EOIs, HR personnel can log in to view, filter, delete applications, update statuses, and sort data—all operations are secure.'),
+(2, 'Ethan Hoang', 'Created the Jobs page with job listings and styling.', 'Created a job listing page that can retrieve job information from a database and supports searching. '),
+(3, 'Lingyu Fu', 'Designed and built the Apply page with form and stying.', 'Added form validation and backend processing. Create an field for all variables of apply page.'),
+(4, 'Jinhang Wu', 'Developed the About page and styling.', 'Created the contribution table and connect to about page. Convert the footer and header into an .inc file and connect it to the index, about, apply, and job pages using PHP.');
 
 -- --------------------------------------------------------
 
@@ -106,7 +116,7 @@ CREATE TABLE `managerlogin` (
 -- Indexes for table `contributions`
 --
 ALTER TABLE `contributions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`contribution_list_id`);
 
 --
 -- Indexes for table `eoi`
