@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" href="styles/Index.css" />
+  <link rel="stylesheet" href="styles/Main.css">
 </head>
 
 <?php include 'header.inc'; ?>
@@ -10,6 +11,9 @@
 <div class="content">
 
 <h1>Welcome to PixelCraft</h1>
+<p>
+  Crafting modern digital experiences that bring ideas to life.
+</p>
 <p>
 A creative agency providing web design, branding, and digital content services, recruiting front‑end developers 
 and designers to support client‑focused web projects. 

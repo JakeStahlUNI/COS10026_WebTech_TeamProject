@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>About | PixelCraft</title>
     <link rel="stylesheet" href="styles/Index.css">
+    <link rel="stylesheet" href="styles/Main.css">
 </head>
 
 <?php include 'header.inc'; ?>

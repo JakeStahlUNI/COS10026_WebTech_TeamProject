@@ -1,79 +1,9 @@
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* ===== BODY ===== */
 body {
-  background: linear-gradient(135deg, #4e3ae4 0%, #7b61ff 50%, #f78da7 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top left, #6a11cb, #2575fc, #ff9a9e);
 }
 
-/* ===== HEADER (MATCH INDEX) ===== */
-.header {
-  display: flex;          
-  align-items: center;  
-  justify-content: space-between; 
-  padding: 10px 20px;
-  background-color: white;
-  width: 100%;
-}
-
-.logo {
-  width: 250px;
-  height: auto;
-}
-
-.search-and-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.search-bar form {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.search-bar input {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  outline: none;
-}
-
-.search-bar button { 
-  padding: 8px 16px; 
-  background-color: #ffffff; 
-  color: black; 
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  cursor: pointer; 
-  font-weight: bold;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: black;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.nav-links a.active {
-  background-color: #f3f4f6;
-  border-radius: 20px;
-  padding: 8px 16px;
-}
-
-/* ===== MAIN LAYOUT WINDOW ===== */
+/* ===== MAIN LAYOUT ===== */
 main {
   width: 95%;
   max-width: 850px;
@@ -89,7 +19,6 @@ main {
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  text-align: left; /* Explicitly forces left alignment */
 }
 
 .intro-section h1 {
@@ -103,16 +32,14 @@ main {
   line-height: 1.6;
 }
 
-/* ===== JOB LISTINGS CONTAINER ===== */
+/* ===== JOB LISTING ===== */
 .job-listing {
   background: white;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Overrides the clunky center alignment completely */
 }
 
-/* Main Job Title Heading Card */
 .job-listing h2 {
   background-color: #ebf5ff;
   color: #1e40af;
@@ -125,7 +52,6 @@ main {
   letter-spacing: 0.5px;
 }
 
-/* Section titles: DESCRIPTION, SALARY, RESPONSIBILITIES, QUALIFICATIONS */
 .job-section-title {
   display: block;
   font-weight: bold;
@@ -134,7 +60,7 @@ main {
   letter-spacing: 1px;
   margin-top: 25px;
   margin-bottom: 8px;
-  color: #475569; /* Sleek, crisp corporate slate color */
+  color: #475569;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 4px;
 }
@@ -146,12 +72,11 @@ main {
 }
 
 .job-salary {
-  color: #059669; /* Crisp emerald green text for clear compensation visibility */
+  color: #059669;
   font-weight: bold;
   font-size: 1.2rem;
 }
 
-/* Beautiful, naturally spaced list bullet formats */
 .job-listing ul {
   list-style-type: disc;
   margin-left: 20px;
@@ -165,13 +90,13 @@ main {
   font-size: 1.02rem;
 }
 
-/* Clear Call-To-Action Apply Button Block */
+/* ===== APPLY BUTTON ===== */
 .apply-container {
   margin-top: 35px;
   border-top: 2px dashed #e2e8f0;
   padding-top: 20px;
   display: flex;
-  justify-content: flex-end; /* Places button nicely on the bottom right corner */
+  justify-content: flex-end;
 }
 
 .apply-btn {
@@ -196,28 +121,4 @@ main {
 
 .apply-btn:active {
   transform: translateY(0);
-}
-
-/* ===== FOOTER (MATCH INDEX) ===== */
-.footer {
-  background: white;
-  color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
-
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.footer-left a {
-  color: black;
-  text-decoration: none;
 }
