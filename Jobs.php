@@ -128,7 +128,8 @@ if ($search_query !== "") {
     ?>
 </main>
 
-<?php include 'footer.inc'; ?>
+
 
 </body>
+<?php include 'footer.inc'; ?>
 </html>

@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>About | PixelCraft</title>
+    <!-- Link to external stylesheets  -->
     <link rel="stylesheet" href="styles/Index.css">
     <link rel="stylesheet" href="styles/Main.css">
 </head>
 
+
+<!-- Shared header -->
 <?php include 'header.inc'; ?>
 
 
@@ -17,19 +20,21 @@
     <ul>
         <li><p style="font-weight: bold;">Group name:<p>
             <ul>
-                <li>Team Laptop</li>
+                <li style="margin-left: 30px;">Team Laptop</li>
             </ul>
         </li>
         <li><p style="font-weight: bold;">Class Day/Time:<p>
             <ul>
-                <li>Every Wednesday | 10:30 - 12:30</li>
+                <li style = "margin-left: 30px;">Every Wednesday | 10:30 - 12:30</li>
             </ul>
         </li>
     </ul>
 </div>
 
+ <!-- member  motivational quotes with list -->
+
 <div class="about">
-    <h2>Member contributions & quotes</h2>
+    <h2>Member quotes</h2>
     <hr>
     <dl>
         
@@ -46,7 +51,7 @@
     <dl>
         
         <dt>Member: Lingyu Fu (Developer)</dt>
-        <dd></dd>Quote(Chinese) : 知人者智，自知者明</dd>
+        <dd>Quote(Chinese) : 知人者智，自知者明</dd>
         <dd>English Translation :Those who know others are wise, and those who know themselves are clear.</dd>
     </dl>
     <dl>
@@ -67,6 +72,9 @@
         </figcaption>
     </figure>
 </div>
+
+
+<!-- dynamic contributions table fetched from database  -->
 
 <div class="about">
     <h2>Contributions Table</h2>
@@ -112,7 +120,7 @@ mysqli_close($dbconn);
 
 
 
-
+<!-- Static table: fun facts about each team member -->
 
 <div class="about">
     <h2>Group Fun Facts</h2>
@@ -156,6 +164,8 @@ mysqli_close($dbconn);
     </table>
 </div>
 
+
+<!-- Display flags representing Aboriginal and Torres Strait Islander peoples -->
 <div class="about">
     <h2>Acknowledgement of Country</h2>
     <div class="footerLink">
@@ -172,7 +182,7 @@ mysqli_close($dbconn);
     </div>
 </div>
 
-
+<!-- Shared footer -->
 <?php include 'footer.inc'; ?>
 
 </html>
