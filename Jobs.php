@@ -66,6 +66,9 @@ if ($search_query !== "") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore active career opportunities and available job positions at PixelCraft. Join our creative team today.">
+    <meta name="keywords" content="PixelCraft, careers, job listings, hiring, employment, developer, designer jobs">
+    <meta name="author" content="PixelCraft Team">
     <title>Jobs | PixelCraft</title>
     <link rel="stylesheet" href="styles/jobs.css">
 </head>
