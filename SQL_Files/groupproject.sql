@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2026 at 04:32 PM
+-- Generation Time: Jun 01, 2026 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -69,6 +69,19 @@ CREATE TABLE `eoi` (
   `status` enum('New','Current','Final') NOT NULL DEFAULT 'New'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `eoi`
+--
+
+INSERT INTO `eoi` (`EOInumber`, `jobref`, `firstname`, `lastname`, `dob`, `gender`, `streetaddress`, `suburb`, `state`, `postcode`, `email`, `phone`, `skills`, `otherskills`, `declaration`, `status`) VALUES
+(1, '10001', 'Jake', 'Stahl', '12/12/1900', 'male', 'idk', 'no clue', 'SA', '1234', 'YouShouldHireMe@gmail.com', '1234567890', '', 'You guys said I only need to pass high school', 'agreed', 'New'),
+(2, '20002', 'adam', 'branch', '09/09/2000', 'non-binary', 'some where', 'idk', 'NSW', '4321', 'doiawndo@oaind.com', '0987654321', 'HTML, CSS, Accessibility Design', 'I made a poster once', 'agreed', 'New'),
+(3, '20002', 'Ben', 'Ten', '04/07/2018', 'male', 'lmoa', 'lmao', 'WA', '8765', 'benten@hot.com', '765432123456', 'UI/UX Design, Content Development', 'just a kid that wants to have fun', 'agreed', 'New'),
+(4, '00001', 'Bob', 'Jane', '02/04/2005', 'male', 'ldanks', 'sadjbas', 'WA', '2134', 'sakhdb@akjbd.com', '123089745104', '', 'T mart', 'agreed', 'New'),
+(5, '10001', 'tommy', 'baller', '09/09/2009', 'non-binary', 'wqdad', 'dqwdwq', 'SA', '1312', 'wqdeqde@fbwq.com', '536753645243', 'Accessibility Design, UI/UX Design', 'Make me CEO bro', 'agreed', 'New'),
+(6, '21345', 'jake', 'notstahl', '03/03/2004', 'female', '2uoebdweq', 'dqwiodiqw', 'SA', '1241', 'dasda@qkjbed.com', '634563754563', 'UI/UX Design', 'hire me', 'agreed', 'New'),
+(7, '65453', 'harry', 'stahl', '02/04/2000', 'male', 'wefewf', 'fwefew', 'QLD', '2132', '2132132@akjwbf.com', '532525315553', 'Accessibility Design', 'Smae', 'agreed', 'New');
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +97,15 @@ CREATE TABLE `jobs` (
   `Qualifications` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`job_id`, `Title`, `Description`, `Salary`, `Responsibilities`, `Qualifications`) VALUES
+(1, 'graphic designer ', 'Create visual content to communicate ideas and messages.', 50000, 'Web design, Branding, Digital marketing', 'Bachelor\'s degree in Graphic Design\r\n5 years in industry experience '),
+(10001, 'CEO', 'We need a guy to run this company.', 1000000, 'you gotta do everything', 'Highschool diploma'),
+(20001, 'Cleaner', 'Clean stuff', 2, 'get a mop and clean the tables.', 'Knowing how a mop works');
+
 -- --------------------------------------------------------
 
 --
@@ -92,21 +114,16 @@ CREATE TABLE `jobs` (
 
 CREATE TABLE `manager` (
   `User_ID` int(11) NOT NULL,
-  `Username` int(11) NOT NULL,
-  `Password` int(11) NOT NULL
+  `Username` varchar(20) NOT NULL,
+  `Password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `managerlogin`
+-- Dumping data for table `manager`
 --
 
-CREATE TABLE `managerlogin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `manager` (`User_ID`, `Username`, `Password`) VALUES
+(1, 'admin', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -137,12 +154,6 @@ ALTER TABLE `manager`
   ADD PRIMARY KEY (`User_ID`);
 
 --
--- Indexes for table `managerlogin`
---
-ALTER TABLE `managerlogin`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -150,25 +161,19 @@ ALTER TABLE `managerlogin`
 -- AUTO_INCREMENT for table `eoi`
 --
 ALTER TABLE `eoi`
-  MODIFY `EOInumber` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EOInumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20002;
 
 --
 -- AUTO_INCREMENT for table `manager`
 --
 ALTER TABLE `manager`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `managerlogin`
---
-ALTER TABLE `managerlogin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
